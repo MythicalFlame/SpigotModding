@@ -27,6 +27,6 @@ public void onLeftClick()
 }
 ```
 ### Custom Entities
-Not supported yet, next priority. Initial implementations will likely use a vanilla entity rather than NMS
+Not supported yet, next priority.
 ### Custom Blocks
 Will take a lot of work, for now you can create a customItem for minimal functionality, but it will become a regular block when you place it.
