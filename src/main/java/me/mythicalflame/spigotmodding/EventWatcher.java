@@ -10,6 +10,20 @@ import org.bukkit.inventory.ItemStack;
 
 public class EventWatcher implements Listener
 {
+    //NOTE: does not do anything if player clicks on a block instead of air. Could be a separate method?
+    @EventHandler
+    public void LeftClickWatcher(PlayerInteractEvent event)
+    {
+        Player player = event.getPlayer();
+        ItemStack hand = player.getItemInHand();
+        ItemStack tinSword = new ModdedItemTinSword().getItem();
+        if (event.getAction() == Action.LEFT_CLICK_AIR) {
+            if (hand.equals(tinSword)) {
+                new ModdedItemTinSword().onLeftClick();
+            }
+        }
+    }
+    
     @EventHandler
     public void RightClickWatcher(PlayerInteractEvent event)
     {
