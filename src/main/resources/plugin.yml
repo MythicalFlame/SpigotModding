@@ -1,0 +1,11 @@
+name: SpigotModding
+version: '${project.version}'
+main: me.mythicalflame.spigotmodding.SpigotModding
+api-version: 1.17
+load: STARTUP
+authors: [ MythicalFlame ]
+description: Spigot modding framework for custom blocks and items
+commands:
+  commandtest:
+    description: mod test
+    usage: /commandtest
