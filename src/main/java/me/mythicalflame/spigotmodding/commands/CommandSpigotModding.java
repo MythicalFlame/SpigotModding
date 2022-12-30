@@ -13,6 +13,14 @@ public class CommandSpigotModding implements CommandExecutor
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
+        Player player = (Player) sender;
+
+        if (!player.hasPermission("spigotmodding.commandspigotmodding"))
+        {
+            sender.sendMessage(ChatColor.RED + "You do not have permission to use this command!");
+            return true;
+        }
+
         if (args.length == 0)
         {
             helpMessage(sender);
@@ -55,7 +63,6 @@ public class CommandSpigotModding implements CommandExecutor
                 if (exactItemExists)
                 {
                     //give requested item
-                    Player player = (Player) sender;
                     player.getInventory().addItem(receivingItem.getItem());
                 }
                 else
