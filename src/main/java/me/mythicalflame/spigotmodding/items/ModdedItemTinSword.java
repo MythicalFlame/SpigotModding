@@ -6,7 +6,7 @@ public class ModdedItemTinSword extends ModdedItem
 {
     public ModdedItemTinSword()
     {
-        super(Material.STONE_SWORD, "Tin Sword");
+        super("example", Material.STONE_SWORD, "Tin Sword");
     }
     //Events
     @Override

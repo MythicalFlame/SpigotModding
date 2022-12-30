@@ -1,6 +1,7 @@
 package me.mythicalflame.spigotmodding;
 
-import me.mythicalflame.spigotmodding.items.ModdedItemTinSword;
+import me.mythicalflame.spigotmodding.SpigotModding;
+import me.mythicalflame.spigotmodding.items.ModdedItem;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,16 +17,27 @@ public class EventWatcher implements Listener
     {
         Player player = event.getPlayer();
         ItemStack hand = player.getItemInHand();
-        ItemStack tinSword = new ModdedItemTinSword().getItem();
-        if (event.getAction() == Action.LEFT_CLICK_AIR) {
-            if (hand.equals(tinSword)) {
-                new ModdedItemTinSword().onLeftClick();
+        ModdedItem itemUsed = null;
+        boolean holdingModdedItem = false;
+
+        for (ModdedItem item : SpigotModding.registeredItems)
+        {
+            if (hand.equals(item.getItem()))
+            {
+                itemUsed = item;
+                holdingModdedItem = true;
             }
         }
-        else if (event.getAction() == Action.RIGHT_CLICK_AIR)
+
+        if (holdingModdedItem)
         {
-            if (hand.equals(tinSword)) {
-                new ModdedItemTinSword().onRightClick();
+            if (event.getAction() == Action.LEFT_CLICK_AIR)
+            {
+                itemUsed.onLeftClick();
+            }
+            else if (event.getAction() == Action.RIGHT_CLICK_AIR)
+            {
+                itemUsed.onRightClick();
             }
         }
     }

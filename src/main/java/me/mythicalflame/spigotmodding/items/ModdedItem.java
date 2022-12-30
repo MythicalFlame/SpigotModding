@@ -6,37 +6,33 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class ModdedItem
 {
-    private ItemStack item;
+    private final String NAMESPACE;
+    private final ItemStack ITEM;
     //constructor
-    public ModdedItem(Material material, String name)
+    public ModdedItem(String namespace, Material material, String name)
     {
-        item = new ItemStack(material);
+        this.NAMESPACE = namespace;
 
-        ItemMeta moddedItemMeta = item.getItemMeta();
+        ItemStack constructorItemStack = new ItemStack(material);
+
+        ItemMeta moddedItemMeta = constructorItemStack.getItemMeta();
         moddedItemMeta.setDisplayName(name);
 
-        item.setItemMeta(moddedItemMeta);
+        constructorItemStack.setItemMeta(moddedItemMeta);
+
+        ITEM = constructorItemStack;
     }
     //get/set
+    public String getNamespace()
+    {
+        return NAMESPACE;
+    }
+
     public ItemStack getItem()
     {
-        return item;
+        return ITEM;
     }
 
-    public void setItem(Material material, String name)
-    {
-        item = new ItemStack(material);
-
-        ItemMeta moddedItemMeta = item.getItemMeta();
-        moddedItemMeta.setDisplayName(name);
-
-        item.setItemMeta(moddedItemMeta);
-    }
-
-    public void setItem(ItemStack item)
-    {
-        this.item = item;
-    }
     //Events to override
     public void onLeftClick(){}
     public void onRightClick(){}

@@ -6,6 +6,6 @@ load: STARTUP
 authors: [ MythicalFlame ]
 description: Spigot modding framework for custom blocks and items
 commands:
-  commandtest:
-    description: mod test
-    usage: /commandtest
+  spigotmodding:
+    description: Main command for spigotmodding
+    usage: /spigotmodding <subCommand>
