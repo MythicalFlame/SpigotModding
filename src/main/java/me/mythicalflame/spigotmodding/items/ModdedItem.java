@@ -7,11 +7,15 @@ import org.bukkit.inventory.meta.ItemMeta;
 public class ModdedItem
 {
     private final String NAMESPACE;
+    private final String ID;
+    private final Material MATERIAL;
     private final ItemStack ITEM;
     //constructor
-    public ModdedItem(String namespace, Material material, String name)
+    public ModdedItem(String namespace, String ID, Material material, String name)
     {
         this.NAMESPACE = namespace;
+        this.ID = ID;
+        this.MATERIAL = material;
 
         ItemStack constructorItemStack = new ItemStack(material);
 
@@ -26,6 +30,16 @@ public class ModdedItem
     public String getNamespace()
     {
         return NAMESPACE;
+    }
+
+    public String getID()
+    {
+        return ID;
+    }
+
+    public Material getMaterial()
+    {
+        return MATERIAL;
     }
 
     public ItemStack getItem()
