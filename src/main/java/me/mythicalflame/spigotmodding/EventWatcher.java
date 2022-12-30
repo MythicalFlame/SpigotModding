@@ -12,7 +12,7 @@ public class EventWatcher implements Listener
 {
     //NOTE: does not do anything if player clicks on a block instead of air. Could be a separate method?
     @EventHandler
-    public void LeftClickWatcher(PlayerInteractEvent event)
+    public void ClickWatcher(PlayerInteractEvent event)
     {
         Player player = event.getPlayer();
         ItemStack hand = player.getItemInHand();
@@ -22,15 +22,8 @@ public class EventWatcher implements Listener
                 new ModdedItemTinSword().onLeftClick();
             }
         }
-    }
-    
-    @EventHandler
-    public void RightClickWatcher(PlayerInteractEvent event)
-    {
-        Player player = event.getPlayer();
-        ItemStack hand = player.getItemInHand();
-        ItemStack tinSword = new ModdedItemTinSword().getItem();
-        if (event.getAction() == Action.RIGHT_CLICK_AIR) {
+        else if (event.getAction() == Action.RIGHT_CLICK_AIR)
+        {
             if (hand.equals(tinSword)) {
                 new ModdedItemTinSword().onRightClick();
             }
