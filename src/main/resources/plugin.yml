@@ -12,6 +12,6 @@ commands:
 permissions:
   spigotmodding.commandspigotmodding:
     description: Allows the user to user the spigotmodding command to see the item list and give them.
-    default: false
+    default: op
     children:
       spigotmodding.commands.spigotmodding: true
