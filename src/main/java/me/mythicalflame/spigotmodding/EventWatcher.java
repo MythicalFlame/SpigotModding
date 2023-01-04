@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.ItemStack;
@@ -18,7 +19,7 @@ public class EventWatcher implements Listener
     public void clickWatcher(PlayerInteractEvent event)
     {
         Player player = event.getPlayer();
-        ItemStack hand = player.getItemInHand();
+        ItemStack hand = player.getInventory().getItemInMainHand();
         ModdedItem itemUsed = null;
         boolean holdingModdedItem = false;
 
@@ -63,6 +64,32 @@ public class EventWatcher implements Listener
         if (consumedModdedConsumable)
         {
             consumableUsed.onConsume(event);
+        }
+    }
+
+    @EventHandler
+    public void damageWatcher(EntityDamageByEntityEvent event)
+    {
+        if (event.getDamager() instanceof Player)
+        {
+            Player attacker = (Player) event.getDamager();
+            ItemStack hand = attacker.getInventory().getItemInMainHand();
+            ModdedItem itemUsed = null;
+            boolean customItemUsed = false;
+
+            for (ModdedItem item : SpigotModding.registeredItems)
+            {
+                if (hand.equals(item.getItem()))
+                {
+                    itemUsed = item;
+                    customItemUsed = true;
+                }
+            }
+
+            if (customItemUsed)
+            {
+                itemUsed.onAttack(event);
+            }
         }
     }
 }

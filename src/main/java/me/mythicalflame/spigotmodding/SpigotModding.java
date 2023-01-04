@@ -13,7 +13,6 @@ public final class SpigotModding extends JavaPlugin
     public static ArrayList<ModdedItem> registeredItems = new ArrayList<>();
     //BELOW: ArrayLists holding specific item types. To be used for EventWatcher
     public static ArrayList<ModdedConsumable> consumables = new ArrayList<>();
-    //public static ArrayList<ModdedSwords> swords = new ArrayList<>();
     @Override
     public void onEnable()
     {
