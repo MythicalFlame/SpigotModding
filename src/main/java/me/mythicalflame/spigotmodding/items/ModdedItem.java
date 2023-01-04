@@ -1,6 +1,7 @@
 package me.mythicalflame.spigotmodding.items;
 
 import org.bukkit.Material;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -48,6 +49,6 @@ public class ModdedItem
     }
 
     //Events to override
-    public void onLeftClick(){}
-    public void onRightClick(){}
+    public void onLeftClick(PlayerInteractEvent event){}
+    public void onRightClick(PlayerInteractEvent event){}
 }
