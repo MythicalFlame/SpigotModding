@@ -1,6 +1,7 @@
 package me.mythicalflame.spigotmodding;
 
 import me.mythicalflame.spigotmodding.commands.CommandSpigotModding;
+import me.mythicalflame.spigotmodding.items.ModdedConsumable;
 import me.mythicalflame.spigotmodding.items.ModdedItem;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -8,7 +9,11 @@ import java.util.ArrayList;
 
 public final class SpigotModding extends JavaPlugin
 {
-    public static ArrayList<ModdedItem> registeredItems = new ArrayList<ModdedItem>();
+    //registeredItems - array to access all registered items
+    public static ArrayList<ModdedItem> registeredItems = new ArrayList<>();
+    //BELOW: ArrayLists holding specific item types. To be used for EventWatcher
+    public static ArrayList<ModdedConsumable> consumables = new ArrayList<>();
+    //public static ArrayList<ModdedSwords> swords = new ArrayList<>();
     @Override
     public void onEnable()
     {
@@ -43,6 +48,10 @@ public final class SpigotModding extends JavaPlugin
         for (ModdedItem item : items)
         {
             registeredItems.add(item);
+            if (item instanceof ModdedConsumable)
+            {
+                consumables.add((ModdedConsumable) item);
+            }
         }
 
         System.out.println("Successfully registered " + items.length + " items with namespace " + expectedNameSpace + ".");
