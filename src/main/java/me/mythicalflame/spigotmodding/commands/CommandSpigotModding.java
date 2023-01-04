@@ -15,12 +15,6 @@ public class CommandSpigotModding implements CommandExecutor
     {
         Player player = (Player) sender;
 
-        if (!player.hasPermission("spigotmodding.commandspigotmodding"))
-        {
-            sender.sendMessage(ChatColor.RED + "You do not have permission to use this command!");
-            return true;
-        }
-
         if (args.length == 0)
         {
             helpMessage(sender);
@@ -29,6 +23,12 @@ public class CommandSpigotModding implements CommandExecutor
 
         if (args[0].equalsIgnoreCase("give"))
         {
+            if (!player.hasPermission("spigotmodding.commandspigotmodding.give"))
+            {
+                sender.sendMessage(ChatColor.RED + "You do not have permission to use the spigotmodding give command!");
+                return true;
+            }
+
             if (args.length <= 2)
             {
                 sender.sendMessage(ChatColor.DARK_GREEN + "/spigotmodding give <itemNamespace> <itemID>");
@@ -79,6 +79,12 @@ public class CommandSpigotModding implements CommandExecutor
         }
         else if (args[0].equalsIgnoreCase("items"))
         {
+            if (!player.hasPermission("spigotmodding.commandspigotmodding.items"))
+            {
+                sender.sendMessage(ChatColor.RED + "You do not have permission to use the spigotmodding items command!");
+                return true;
+            }
+
             String result = "List of registered items: ";
             for (ModdedItem item : SpigotModding.registeredItems)
             {

@@ -10,8 +10,9 @@ commands:
     description: Main command for spigotmodding
     usage: /spigotmodding <subCommand>
 permissions:
-  spigotmodding.commandspigotmodding:
-    description: Allows the user to user the spigotmodding command to see the item list and give them.
+  spigotmodding.commandspigotmodding.give:
+    description: Allows the user to use the spigotmodding give command to give custom items.
     default: op
-    children:
-      spigotmodding.commands.spigotmodding: true
+  spigotmodding.commandspigotmodding.items:
+    description: Allows the user to use the spigotmodding items command to see the list of registered items.
+    default: true
