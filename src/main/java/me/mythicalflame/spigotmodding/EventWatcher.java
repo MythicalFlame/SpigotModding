@@ -1,6 +1,5 @@
 package me.mythicalflame.spigotmodding;
 
-import me.mythicalflame.spigotmodding.SpigotModding;
 import me.mythicalflame.spigotmodding.items.ModdedConsumable;
 import me.mythicalflame.spigotmodding.items.ModdedItem;
 import org.bukkit.entity.Player;
@@ -22,10 +21,15 @@ public class EventWatcher implements Listener
         ItemStack hand = player.getInventory().getItemInMainHand();
         ModdedItem itemUsed = null;
         boolean holdingModdedItem = false;
+        //Check for lore
+        if (!hand.getItemMeta().hasLore())
+        {
+            return;
+        }
 
         for (ModdedItem item : SpigotModding.getRegisteredItems())
         {
-            if (hand.equals(item.getItem()))
+            if (hand.getItemMeta().getLore().get(0).equals(item.getItem().getItemMeta().getLore().get(0)))
             {
                 itemUsed = item;
                 holdingModdedItem = true;
@@ -51,10 +55,15 @@ public class EventWatcher implements Listener
         ItemStack consumed = event.getItem();
         ModdedConsumable consumableUsed = null;
         boolean consumedModdedConsumable = false;
+        //Check for lore
+        if (!consumed.getItemMeta().hasLore())
+        {
+            return;
+        }
 
         for (ModdedConsumable item : SpigotModding.getConsumables())
         {
-            if (consumed.equals(item.getItem()))
+            if (consumed.getItemMeta().getLore().get(0).equals(item.getItem().getItemMeta().getLore().get(0)))
             {
                 consumableUsed = item;
                 consumedModdedConsumable = true;
@@ -76,10 +85,15 @@ public class EventWatcher implements Listener
             ItemStack hand = attacker.getInventory().getItemInMainHand();
             ModdedItem itemUsed = null;
             boolean customItemUsed = false;
+            //Check for lore
+            if (!hand.getItemMeta().hasLore())
+            {
+                return;
+            }
 
             for (ModdedItem item : SpigotModding.getRegisteredItems())
             {
-                if (hand.equals(item.getItem()))
+                if (hand.getItemMeta().getLore().get(0).equals(item.getItem().getItemMeta().getLore().get(0)))
                 {
                     itemUsed = item;
                     customItemUsed = true;
