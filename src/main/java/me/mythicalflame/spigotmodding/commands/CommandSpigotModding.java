@@ -36,7 +36,7 @@ public class CommandSpigotModding implements CommandExecutor
             }
             //check namespace existence
             boolean namespaceExists = false;
-            for (ModdedItem item : SpigotModding.registeredItems)
+            for (ModdedItem item : SpigotModding.getRegisteredItems())
             {
                 if (args[1].equalsIgnoreCase(item.getNamespace()))
                 {
@@ -50,7 +50,7 @@ public class CommandSpigotModding implements CommandExecutor
                 ModdedItem receivingItem = null;
                 //check if item with namespace exists
                 boolean exactItemExists = false;
-                for (ModdedItem item : SpigotModding.registeredItems)
+                for (ModdedItem item : SpigotModding.getRegisteredItems())
                 {
                     if (args[1].equalsIgnoreCase(item.getNamespace()) && args[2].equalsIgnoreCase(item.getID()))
                     {
@@ -86,7 +86,7 @@ public class CommandSpigotModding implements CommandExecutor
             }
 
             String result = "List of registered items: ";
-            for (ModdedItem item : SpigotModding.registeredItems)
+            for (ModdedItem item : SpigotModding.getRegisteredItems())
             {
                 result += item.getNamespace() + ":" + item.getID() + ", ";
             }

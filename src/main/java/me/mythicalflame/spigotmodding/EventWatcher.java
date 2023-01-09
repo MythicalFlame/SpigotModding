@@ -23,7 +23,7 @@ public class EventWatcher implements Listener
         ModdedItem itemUsed = null;
         boolean holdingModdedItem = false;
 
-        for (ModdedItem item : SpigotModding.registeredItems)
+        for (ModdedItem item : SpigotModding.getRegisteredItems())
         {
             if (hand.equals(item.getItem()))
             {
@@ -52,7 +52,7 @@ public class EventWatcher implements Listener
         ModdedConsumable consumableUsed = null;
         boolean consumedModdedConsumable = false;
 
-        for (ModdedConsumable item : SpigotModding.consumables)
+        for (ModdedConsumable item : SpigotModding.getConsumables())
         {
             if (consumed.equals(item.getItem()))
             {
@@ -77,7 +77,7 @@ public class EventWatcher implements Listener
             ModdedItem itemUsed = null;
             boolean customItemUsed = false;
 
-            for (ModdedItem item : SpigotModding.registeredItems)
+            for (ModdedItem item : SpigotModding.getRegisteredItems())
             {
                 if (hand.equals(item.getItem()))
                 {
