@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
@@ -16,13 +17,15 @@ public class ModdedItem
     private final Material MATERIAL;
     private final ItemStack ITEM;
     private final Integer CUSTOM_MODEL_DATA;
+    private final Recipe[] RECIPES;
     //constructor
     //without customModelData
-    public ModdedItem(String namespace, String ID, Material material, String name)
+    public ModdedItem(String namespace, String ID, Material material, String name, Recipe[] recipes)
     {
         this.NAMESPACE = namespace;
         this.ID = ID;
         this.MATERIAL = material;
+        this.RECIPES = recipes;
         this.CUSTOM_MODEL_DATA = null;
 
         ItemStack constructorItemStack = new ItemStack(material);
@@ -45,11 +48,12 @@ public class ModdedItem
         ITEM = constructorItemStack;
     }
     //with customModelData
-    public ModdedItem(String namespace, String ID, Material material, String name, int customModelData)
+    public ModdedItem(String namespace, String ID, Material material, String name, Recipe[] recipes, int customModelData)
     {
         this.NAMESPACE = namespace;
         this.ID = ID;
         this.MATERIAL = material;
+        this.RECIPES = recipes;
         this.CUSTOM_MODEL_DATA = customModelData;
 
         ItemStack constructorItemStack = new ItemStack(material);
@@ -60,7 +64,7 @@ public class ModdedItem
         /* Lore for ModdedItem
             First line - "namespace:id" (used to check if items are equivalent after given custom lore or renamed
             Second line - extra lore
-         */
+        */
         ArrayList<String> moddedItemLore = new ArrayList<>();
         moddedItemLore.add(namespace.toLowerCase() + ":" + ID.toLowerCase());
         moddedItemMeta.setLore(moddedItemLore);
