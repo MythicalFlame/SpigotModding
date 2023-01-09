@@ -10,9 +10,9 @@ import java.util.ArrayList;
 public final class SpigotModding extends JavaPlugin
 {
     //registeredItems - array to access all registered items
-    public static ArrayList<ModdedItem> registeredItems = new ArrayList<>();
+    private static ArrayList<ModdedItem> registeredItems = new ArrayList<>();
     //BELOW: ArrayLists holding specific item types. To be used for EventWatcher
-    public static ArrayList<ModdedConsumable> consumables = new ArrayList<>();
+    private static ArrayList<ModdedConsumable> consumables = new ArrayList<>();
     @Override
     public void onEnable()
     {
@@ -29,6 +29,16 @@ public final class SpigotModding extends JavaPlugin
     {
         // Plugin shutdown logic
         System.out.println("Shutting down SpigotModding plugin...");
+    }
+
+    public static ArrayList<ModdedItem> getRegisteredItems()
+    {
+        return registeredItems;
+    }
+
+    public static ArrayList<ModdedConsumable> getConsumables()
+    {
+        return consumables;
     }
 
     public static boolean registerItems(ModdedItem[] items)
