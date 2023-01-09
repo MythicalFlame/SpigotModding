@@ -3,7 +3,9 @@ Very experimental and new, lacking many features.
 ## Usage
 Add the release jar as a plugin on your server, and as a dependency for your new plugin.
 ### Custom Items
-Extend `ModdedItem` class, and create a default constructor with a namespace, item id, material, and display name:
+Currently, items can either be a regular item or a consumable.
+
+For a regular item, extend the `ModdedItem` class and create a default constructor with a namespace, item id, material, and display name:
 (Example for an item named TinSword)
 ```java
 public ModdedItemTinSword()
@@ -11,18 +13,28 @@ public ModdedItemTinSword()
   super("ultraswords", "tin_sword", Material.IRON_SWORD, "Tin Sword")
 }
 ```
-CustomModelData is not yet supported, but will be soon.
+Optionally, you can put an integer argument after the display name argument to add that number as custom model data for the item.
 
-Additionally, custom tools and weapons do not have a class, so custom durability and damage does not exist
+If you wish to make your custom item a consumable, the code is similar, but you need to extend `ModdedConsumable` and override the `onConsume(PlayerItemConsumeEvent event)` method
+
+```java
+@Override
+public void onConsume(PlayerItemConsumeEvent event)
+{
+  Player player = event.getPlayer();
+  player.addPotionEffect(new PotionEffect(INCREASE_DAMAGE, 60, 0), true);
+}
+```
+
+Just as with regular items, custom consumables can also have a custom model data argument.
+
+Custom tools and weapons do not have a class, so custom durability and damage does not exist
 However, you can "create" damage by using events
 ```java
 @Override
-public void onLeftClick()
+public void onAttack(EntityDamageByEntityEvent event)
 {
-  if (/*hit mob*/)
-  {
-    //Deal x damage to mob
-  }
+  event.setDamage(...);
 }
 ```
 ### Registering items
@@ -38,7 +50,7 @@ ModdedItem[] items = {new ModdedItemTinSword()};
 SpigotModding.registerItems(items);
 ```
 ### Features yet to be implemented
-#### Food and tools/weapons class (extending ModdedItem)
+#### Tools with custom durability and potentially a weapons class (extending ModdedItem)
 #### Custom Entities
 Not supported yet, next priority.
 #### Custom Blocks
