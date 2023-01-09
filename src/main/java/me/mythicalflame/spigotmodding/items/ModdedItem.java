@@ -1,10 +1,13 @@
 package me.mythicalflame.spigotmodding.items;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.ArrayList;
 
 public class ModdedItem
 {
@@ -25,7 +28,16 @@ public class ModdedItem
         ItemStack constructorItemStack = new ItemStack(material);
 
         ItemMeta moddedItemMeta = constructorItemStack.getItemMeta();
-        moddedItemMeta.setDisplayName(name);
+        //Name without italics
+        moddedItemMeta.setDisplayName(ChatColor.RESET + name);
+        /* Lore for ModdedItem
+            First line - "namespace:id" (used to check if items are equivalent after given custom lore or renamed
+            Second line - extra lore
+         */
+        ArrayList<String> moddedItemLore = new ArrayList<>();
+        moddedItemLore.add(namespace.toLowerCase() + ":" + ID.toLowerCase());
+        moddedItemMeta.setLore(moddedItemLore);
+
         moddedItemMeta.setCustomModelData(CUSTOM_MODEL_DATA);
 
         constructorItemStack.setItemMeta(moddedItemMeta);
@@ -43,7 +55,16 @@ public class ModdedItem
         ItemStack constructorItemStack = new ItemStack(material);
 
         ItemMeta moddedItemMeta = constructorItemStack.getItemMeta();
-        moddedItemMeta.setDisplayName(name);
+        //Name without italics
+        moddedItemMeta.setDisplayName(ChatColor.RESET + name);
+        /* Lore for ModdedItem
+            First line - "namespace:id" (used to check if items are equivalent after given custom lore or renamed
+            Second line - extra lore
+         */
+        ArrayList<String> moddedItemLore = new ArrayList<>();
+        moddedItemLore.add(namespace.toLowerCase() + ":" + ID.toLowerCase());
+        moddedItemMeta.setLore(moddedItemLore);
+
         moddedItemMeta.setCustomModelData(CUSTOM_MODEL_DATA);
 
         constructorItemStack.setItemMeta(moddedItemMeta);
