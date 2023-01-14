@@ -17,15 +17,15 @@ public class ModdedItem
     private final Material MATERIAL;
     private final ItemStack ITEM;
     private final Integer CUSTOM_MODEL_DATA;
-    private final Recipe[] RECIPES;
+    /*private final Recipe[] RECIPES;*/
     //constructor
     //without customModelData
-    public ModdedItem(String namespace, String ID, Material material, String name, Recipe[] recipes)
+    public ModdedItem(String namespace, String ID, Material material, String name/*, Recipe[] recipes*/)
     {
         this.NAMESPACE = namespace;
         this.ID = ID;
         this.MATERIAL = material;
-        this.RECIPES = recipes;
+        /*this.RECIPES = recipes;*/
         this.CUSTOM_MODEL_DATA = null;
 
         ItemStack constructorItemStack = new ItemStack(material);
@@ -48,12 +48,12 @@ public class ModdedItem
         ITEM = constructorItemStack;
     }
     //with customModelData
-    public ModdedItem(String namespace, String ID, Material material, String name, Recipe[] recipes, int customModelData)
+    public ModdedItem(String namespace, String ID, Material material, String name, /*Recipe[] recipes,*/ int customModelData)
     {
         this.NAMESPACE = namespace;
         this.ID = ID;
         this.MATERIAL = material;
-        this.RECIPES = recipes;
+        /*this.RECIPES = recipes;*/
         this.CUSTOM_MODEL_DATA = customModelData;
 
         ItemStack constructorItemStack = new ItemStack(material);
