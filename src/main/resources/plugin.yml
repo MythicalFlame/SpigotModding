@@ -16,3 +16,9 @@ permissions:
   spigotmodding.commandspigotmodding.items:
     description: Allows the user to use the spigotmodding items command to see the list of registered items.
     default: true
+  spigotmodding.commandspigotmodding.item:
+    description: Allows the user to use the spigotmodding item command to inspect an item.
+    default: true
+  spigotmodding.commandspigotmodding.*:
+    description: Allows the user to use the spigotmodding command and its subcommands.
+    default: false

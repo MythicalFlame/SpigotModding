@@ -96,7 +96,7 @@ public class ModdedItem
         return ITEM;
     }
 
-    public int getCustomModelData()
+    public Integer getCustomModelData()
     {
         return CUSTOM_MODEL_DATA;
     }

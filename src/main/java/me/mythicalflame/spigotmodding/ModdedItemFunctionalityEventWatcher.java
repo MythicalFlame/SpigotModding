@@ -11,7 +11,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class EventWatcher implements Listener
+public class ModdedItemFunctionalityEventWatcher implements Listener
 {
     //NOTE: does not do anything if player clicks on a block instead of air. Could be a separate method?
     @EventHandler
