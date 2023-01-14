@@ -21,6 +21,11 @@ public class ModdedItemFunctionalityEventWatcher implements Listener
         ItemStack hand = player.getInventory().getItemInMainHand();
         ModdedItem itemUsed = null;
         boolean holdingModdedItem = false;
+        //Check for item meta
+        if (!hand.hasItemMeta())
+        {
+            return;
+        }
         //Check for lore
         if (!hand.getItemMeta().hasLore())
         {
@@ -55,6 +60,11 @@ public class ModdedItemFunctionalityEventWatcher implements Listener
         ItemStack consumed = event.getItem();
         ModdedConsumable consumableUsed = null;
         boolean consumedModdedConsumable = false;
+        //Check for item meta
+        if (!consumed.hasItemMeta())
+        {
+            return;
+        }
         //Check for lore
         if (!consumed.getItemMeta().hasLore())
         {
@@ -85,6 +95,11 @@ public class ModdedItemFunctionalityEventWatcher implements Listener
             ItemStack hand = attacker.getInventory().getItemInMainHand();
             ModdedItem itemUsed = null;
             boolean customItemUsed = false;
+            //Check for item meta
+            if (!hand.hasItemMeta())
+            {
+                return;
+            }
             //Check for lore
             if (!hand.getItemMeta().hasLore())
             {
