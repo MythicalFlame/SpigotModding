@@ -19,6 +19,7 @@ public final class SpigotModding extends JavaPlugin
         // Plugin startup logic
         System.out.println("Starting up SpigotModding plugin...");
         getServer().getPluginManager().registerEvents(new ModdedItemFunctionalityEventWatcher(), this);
+        getServer().getPluginManager().registerEvents(new RecipeEventWatcher(), this);
         this.getCommand("spigotmodding").setExecutor(new CommandSpigotModding());
 
         System.out.println("Finished starting up SpigotModding plugin");
@@ -36,6 +37,11 @@ public final class SpigotModding extends JavaPlugin
         return registeredItems;
     }
 
+    public static ArrayList<ModdedConsumable> getConsumables()
+    {
+        return consumables;
+    }
+
     public static ModdedItem getRegisteredItem(String namespace, String ID)
     {
         for (ModdedItem item : registeredItems)
@@ -47,11 +53,6 @@ public final class SpigotModding extends JavaPlugin
         }
 
         return null;
-    }
-
-    public static ArrayList<ModdedConsumable> getConsumables()
-    {
-        return consumables;
     }
 
     public static boolean registerItems(ModdedItem[] items)
