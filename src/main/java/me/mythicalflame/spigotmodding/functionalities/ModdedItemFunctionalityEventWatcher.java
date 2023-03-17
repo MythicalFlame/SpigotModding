@@ -1,5 +1,6 @@
-package me.mythicalflame.spigotmodding;
+package me.mythicalflame.spigotmodding.functionalities;
 
+import me.mythicalflame.spigotmodding.SpigotModding;
 import me.mythicalflame.spigotmodding.items.ModdedConsumable;
 import me.mythicalflame.spigotmodding.items.ModdedItem;
 import org.bukkit.entity.Player;

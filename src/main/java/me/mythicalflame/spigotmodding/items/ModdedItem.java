@@ -5,7 +5,6 @@ import org.bukkit.Material;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
@@ -16,16 +15,17 @@ public class ModdedItem
     private final String ID;
     private final Material MATERIAL;
     private final ItemStack ITEM;
+    //private final VanillaInteractionOption VANILLA_INTERACTIONS;
     private final Integer CUSTOM_MODEL_DATA;
-    /*private final Recipe[] RECIPES;*/
-    //constructor
+    /*private final CustomRecipe[] RECIPES;*/
+    //constructors
     //without customModelData
-    public ModdedItem(String namespace, String ID, Material material, String name/*, Recipe[] recipes*/)
+    public ModdedItem(String namespace, String ID, Material material, String name/*, CustomRecipe[] recipes*/)
     {
         this.NAMESPACE = namespace;
         this.ID = ID;
         this.MATERIAL = material;
-        /*this.RECIPES = recipes;*/
+        /*RECIPES = recipes;*/
         this.CUSTOM_MODEL_DATA = null;
 
         ItemStack constructorItemStack = new ItemStack(material);
@@ -48,12 +48,12 @@ public class ModdedItem
         ITEM = constructorItemStack;
     }
     //with customModelData
-    public ModdedItem(String namespace, String ID, Material material, String name, /*Recipe[] recipes,*/ int customModelData)
+    public ModdedItem(String namespace, String ID, Material material, String name, /*CustomRecipe[] recipes,*/ int customModelData)
     {
         this.NAMESPACE = namespace;
         this.ID = ID;
         this.MATERIAL = material;
-        /*this.RECIPES = recipes;*/
+        /*RECIPES = recipes;*/
         this.CUSTOM_MODEL_DATA = customModelData;
 
         ItemStack constructorItemStack = new ItemStack(material);
@@ -95,6 +95,8 @@ public class ModdedItem
     {
         return ITEM;
     }
+
+    /*public CustomRecipe[] getRecipes() { return RECIPES; }*/
 
     public Integer getCustomModelData()
     {
