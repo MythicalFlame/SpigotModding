@@ -3,7 +3,7 @@ Very experimental and new, lacking many features.
 ## Usage
 Add the release jar as a plugin on your server, and as a dependency for your new plugin.
 ### Custom Items
-Currently, items can either be a regular item or a consumable.
+Currently, items can either be a regular item, a consumable, or a custom armor piece (custom armor covered in the next section).
 
 For a regular item, extend the `ModdedItem` class and create a default constructor with a namespace, item id, material, and display name:
 (Example for an item named TinSword)
@@ -37,9 +37,17 @@ public void onAttack(EntityDamageByEntityEvent event)
   event.setDamage(...);
 }
 ```
-### Registering items
+### Custom Armor
+> **_NOTE:_**  This feature is only available in the latest preview (0.5.0-PRERELEASE) and not the latest stable version (0.4.1)
+
+Custom armor is a bit more complex to set up. To begin, create your armor piece item classes. These should inherit from `ModdedArmorPiece`. Next, create a new class inheriting from `ArmorSetEffect`. The constructor should take potion effects. The plugin checks every 10 seconds if a player has an armor set on to give effects, so you should make the duration of all of your potion effects at least 10. Finally, create a subclass of `ModdedArmorSet` and pass in a `ModdedArmorPiece` array beginning with the helmet object and ending with your boots object, and an `ArmorSetEffect` object.
+
+#### NOTE: if your armor set does not require some slots, put those slots as null in your `ModdedArmorPiece` array.
+### Registering your mod
+> **_NOTE:_**  This method only works on the latest stable version (0.4.1) and not the latest preview (0.5.0-PRERELEASE)
+
 In the startup logic section of your plugin, you need to register items. Items that you register MUST have the same namespace. If you wish to use separate namespaces, create a separate plugin.
-Registering example (with the tin sword from above):
+Registration example (with the tin sword from above):
 ```java
 import me.mythicalflame.spigotmodding.SpigotModding;
 import me.mythicalflame.spigotmodding.items.ModdedItem;
@@ -48,6 +56,22 @@ import me.mythicalflame.spigotmodding.items.ModdedItem;
 
 ModdedItem[] items = {new ModdedItemTinSword()};
 SpigotModding.registerItems(items);
+```
+
+> **_NOTE:_**  This method only works on the latest preview (0.5.0-PRERELEASE) and not the latest stable version (0.4.1)
+
+In the latest prerelease, the `registerMods()` method was introduced. This method takes a `ModdedItem` array (can be null to not register any) and a `ModdedArmorSet` array (can be null to not register any).
+Registration example (with the steel armor set from above):
+```java
+import me.mythicalflame.spigotmodding.SpigotModding;
+import me.mythicalflame.spigotmodding.items.ModdedItem;
+import me.mythicalflame.spigotmodding.items.ModdedArmorSet;
+
+...
+
+ModdedItem[] items = {new ModdedItemSteelHelmet(), new ModdedItemSteelChestplate(), new ModdedItemSteelLeggings(), new ModdedItemSteelBoots()};
+ModdedArmorSet[] sets = {new ModdedArmorSetSteelSet()};
+SpigotModding.registerMods(items, sets);
 ```
 ### Features yet to be implemented
 #### Tools with custom durability and potentially a weapons class (extending ModdedItem)
