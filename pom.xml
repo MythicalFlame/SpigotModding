@@ -6,7 +6,7 @@
 
     <groupId>me.mythicalflame</groupId>
     <artifactId>SpigotModding</artifactId>
-    <version>0.5.0</version>
+    <version>0.5.0-PRERELEASE</version>
     <packaging>jar</packaging>
 
     <name>SpigotModding</name>

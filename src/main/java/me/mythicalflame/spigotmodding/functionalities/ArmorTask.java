@@ -1,6 +1,7 @@
 package me.mythicalflame.spigotmodding.functionalities;
 
 import me.mythicalflame.spigotmodding.SpigotModding;
+import me.mythicalflame.spigotmodding.items.ModdedArmorPiece;
 import me.mythicalflame.spigotmodding.items.ModdedArmorSet;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -28,10 +29,34 @@ public class ArmorTask extends BukkitRunnable
                 ItemStack playerChestplate = player.getInventory().getChestplate();
                 ItemStack playerLeggings = player.getInventory().getLeggings();
                 ItemStack playerBoots = player.getInventory().getBoots();
-                ItemStack setHelmet = set.getPieces()[0].getItem();
-                ItemStack setChestplate = set.getPieces()[1].getItem();
-                ItemStack setLeggings = set.getPieces()[2].getItem();
-                ItemStack setBoots = set.getPieces()[3].getItem();
+
+                ModdedArmorPiece setHelmetPiece = set.getPieces()[0];
+                ItemStack setHelmet = null;
+                if (setHelmetPiece != null)
+                {
+                    setHelmet = set.getPieces()[0].getItem();
+                }
+
+                ModdedArmorPiece setChestplatePiece = set.getPieces()[1];
+                ItemStack setChestplate = null;
+                if (setChestplatePiece != null)
+                {
+                    setChestplate = set.getPieces()[1].getItem();
+                }
+
+                ModdedArmorPiece setLeggingsPiece = set.getPieces()[2];
+                ItemStack setLeggings = null;
+                if (setLeggingsPiece != null)
+                {
+                    setLeggings = set.getPieces()[2].getItem();
+                }
+
+                ModdedArmorPiece setBootsPiece = set.getPieces()[3];
+                ItemStack setBoots = null;
+                if (setBootsPiece != null)
+                {
+                    setBoots = set.getPieces()[3].getItem();
+                }
 
                 //assume player is wearing set and attempt to disprove the assumption
                 if (setHelmet != null)
