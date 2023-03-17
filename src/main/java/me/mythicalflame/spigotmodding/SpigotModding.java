@@ -25,12 +25,29 @@ public final class SpigotModding extends JavaPlugin
     {
         // Plugin startup logic
         System.out.println("Starting up SpigotModding plugin...");
+
+        //Set up configuration
+        getConfig().options().copyDefaults();
+        saveDefaultConfig();
+
+        //Check configuration
         //If enabled, check for basic item functionality (clicking, attacking, eating...)
-        getServer().getPluginManager().registerEvents(new ModdedItemFunctionalityEventWatcher(), this);
+        if (getConfig().getBoolean("itemFunctionality"))
+        {
+            getServer().getPluginManager().registerEvents(new ModdedItemFunctionalityEventWatcher(), this);
+        }
         //If enabled, cancel recipes that use custom items
-        getServer().getPluginManager().registerEvents(new RecipeEventWatcher(), this);
+        if (getConfig().getBoolean("cancelRecipes"))
+        {
+            getServer().getPluginManager().registerEvents(new RecipeEventWatcher(), this);
+        }
         //If enabled, watch for custom armor wearing
-        BukkitTask armorTask = new ArmorTask(this).runTaskTimer(this, 100, 200);
+        if (getConfig().getBoolean("armorFunctionality"))
+        {
+            BukkitTask armorTask = new ArmorTask(this).runTaskTimer(this, 100, 200);
+        }
+
+        //Enable commands
         this.getCommand("spigotmodding").setExecutor(new CommandSpigotModding());
 
         System.out.println("Finished starting up SpigotModding plugin");
