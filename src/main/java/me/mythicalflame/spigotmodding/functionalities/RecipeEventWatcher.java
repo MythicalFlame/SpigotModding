@@ -15,8 +15,8 @@ public class RecipeEventWatcher implements Listener
     {
         CraftingInventory inventory = event.getInventory();
         for (ItemStack stack : inventory.getStorageContents()) {
-            //check if stack has itemmeta
-            if (stack.hasItemMeta())
+            //check if stack has lore
+            if (stack.hasItemMeta() && stack.getItemMeta().hasLore())
             {
                 //check if stack is a modded item
                 for (ModdedItem item : SpigotModding.getRegisteredItems())
@@ -36,8 +36,8 @@ public class RecipeEventWatcher implements Listener
     public void onSmelt(FurnaceSmeltEvent event)
     {
         ItemStack ingredient = event.getSource();
-        //check if stack has itemmeta
-        if (ingredient.hasItemMeta())
+        //check if stack has lore
+        if (ingredient.hasItemMeta() && ingredient.getItemMeta().hasLore())
         {
             //check if stack is a modded item
             for (ModdedItem item : SpigotModding.getRegisteredItems())
@@ -57,8 +57,8 @@ public class RecipeEventWatcher implements Listener
     public void onBurn(FurnaceBurnEvent event)
     {
         ItemStack fuel = event.getFuel();
-        //check if stack has itemmeta
-        if (fuel.hasItemMeta())
+        //check if stack has lore
+        if (fuel.hasItemMeta() && fuel.getItemMeta().hasLore())
         {
             //check if stack is a modded item
             for (ModdedItem item : SpigotModding.getRegisteredItems())
@@ -79,8 +79,8 @@ public class RecipeEventWatcher implements Listener
     public void onBrew(BrewEvent event)
     {
         ItemStack ingredient = event.getContents().getIngredient();
-        //check if stack has itemmeta
-        if (ingredient.hasItemMeta())
+        //check if stack has lore
+        if (ingredient.hasItemMeta() && ingredient.getItemMeta().hasLore())
         {
             //check if stack is a modded item
             for (ModdedItem item : SpigotModding.getRegisteredItems())
@@ -96,13 +96,13 @@ public class RecipeEventWatcher implements Listener
 
     //smithing
     @EventHandler
-    public void onSmelt(PrepareSmithingEvent event)
+    public void onSmith(PrepareSmithingEvent event)
     {
         SmithingInventory inventory = event.getInventory();
         ItemStack first = inventory.getItem(0);
         ItemStack second = inventory.getItem(1);
-        //check if first stack has itemmeta
-        if (first.hasItemMeta())
+        //check if first stack has lore
+        if (first.hasItemMeta() && first.getItemMeta().hasLore())
         {
             //check if stack is a modded item
             for (ModdedItem item : SpigotModding.getRegisteredItems())
@@ -114,8 +114,8 @@ public class RecipeEventWatcher implements Listener
                 }
             }
         }
-        //check if second stack has itemmeta
-        if (second.hasItemMeta())
+        //check if second stack has lore
+        if (second.hasItemMeta() && second.getItemMeta().hasLore())
         {
             //check if stack is a modded item
             for (ModdedItem item : SpigotModding.getRegisteredItems())
