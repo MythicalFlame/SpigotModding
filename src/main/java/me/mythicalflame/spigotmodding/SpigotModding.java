@@ -24,7 +24,7 @@ public final class SpigotModding extends JavaPlugin
     public void onEnable()
     {
         // Plugin startup logic
-        System.out.println("Starting up SpigotModding plugin...");
+        System.out.println("[SpigotModding] Starting up SpigotModding plugin...");
 
         //Set up configuration
         getConfig().options().copyDefaults();
@@ -50,14 +50,14 @@ public final class SpigotModding extends JavaPlugin
         //Enable commands
         this.getCommand("spigotmodding").setExecutor(new CommandSpigotModding());
 
-        System.out.println("Finished starting up SpigotModding plugin");
+        System.out.println("[SpigotModding] Finished starting up SpigotModding plugin");
     }
 
     @Override
     public void onDisable()
     {
         // Plugin shutdown logic
-        System.out.println("Shutting down SpigotModding plugin...");
+        System.out.println("[SpigotModding] Shutting down SpigotModding plugin...");
     }
 
     public static ArrayList<ModdedItem> getRegisteredItems()
@@ -117,7 +117,7 @@ public final class SpigotModding extends JavaPlugin
         {
             if (set.getPieces().length > 4)
             {
-                System.err.println("Failed to register armorsets! One of your armorsets has > 4 pieces.");
+                System.err.println("[SpigotModding] Failed to register armorsets! One of your armorsets has > 4 pieces.");
                 return false;
             }
         }
@@ -138,7 +138,7 @@ public final class SpigotModding extends JavaPlugin
         {
             if (!expectedNameSpace.equals(item.getNamespace()))
             {
-                System.err.println("Failed to register items! Expected namespace: " + expectedNameSpace + ", received namespace: " + item.getNamespace() + ".");
+                System.err.println("[SpigotModding] Failed to register items! Expected namespace: " + expectedNameSpace + ", received namespace: " + item.getNamespace() + ".");
                 return false;
             }
         }
@@ -152,7 +152,7 @@ public final class SpigotModding extends JavaPlugin
             }
         }
 
-        System.out.println("Successfully registered " + items.length + " items with namespace " + expectedNameSpace + ".");
+        System.out.println("[SpigotModding] Successfully registered " + items.length + " items with namespace " + expectedNameSpace + ".");
         return true;
     }
 }
