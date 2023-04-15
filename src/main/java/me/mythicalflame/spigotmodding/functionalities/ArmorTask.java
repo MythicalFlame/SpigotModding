@@ -24,12 +24,16 @@ public class ArmorTask extends BukkitRunnable
         {
             for (Player player : Bukkit.getOnlinePlayers())
             {
-                //TODO: add lore checking while ensuring efficiency
                 ItemStack playerHelmet = player.getInventory().getHelmet();
+                boolean playerHelmetHasLore = (playerHelmet != null && playerHelmet.hasItemMeta() && playerHelmet.getItemMeta().hasLore());
                 ItemStack playerChestplate = player.getInventory().getChestplate();
+                boolean playerChestplateHasLore = (playerChestplate != null && playerChestplate.hasItemMeta() && playerChestplate.getItemMeta().hasLore());
                 ItemStack playerLeggings = player.getInventory().getLeggings();
+                boolean playerLeggingsHasLore = (playerLeggings != null && playerLeggings.hasItemMeta() && playerLeggings.getItemMeta().hasLore());
                 ItemStack playerBoots = player.getInventory().getBoots();
+                boolean playerBootsHasLore = (playerBoots != null && playerBoots.hasItemMeta() && playerBoots.getItemMeta().hasLore());
 
+                //retrieve items from the set
                 ModdedArmorPiece setHelmetPiece = set.getPieces()[0];
                 ItemStack setHelmet = null;
                 if (setHelmetPiece != null)
@@ -59,36 +63,24 @@ public class ArmorTask extends BukkitRunnable
                 }
 
                 //assume player is wearing set and attempt to disprove the assumption
-                if (setHelmet != null)
+                if (!playerHelmetHasLore || !(playerHelmet.getItemMeta().getLore().get(0).equals(setHelmet.getItemMeta().getLore().get(0))))
                 {
-                    if (playerHelmet == null || !playerHelmet.equals(setHelmet))
-                    {
-                        continue;
-                    }
+                    continue;
                 }
 
-                if (setChestplate != null)
+                if (!playerChestplateHasLore || !(playerChestplate.getItemMeta().getLore().get(0).equals(setChestplate.getItemMeta().getLore().get(0))))
                 {
-                    if (playerChestplate == null || !playerChestplate.equals(setChestplate))
-                    {
-                        continue;
-                    }
+                    continue;
                 }
 
-                if (setLeggings != null)
+                if (!playerLeggingsHasLore || !(playerLeggings.getItemMeta().getLore().get(0).equals(setLeggings.getItemMeta().getLore().get(0))))
                 {
-                    if (playerLeggings == null || !playerLeggings.equals(setLeggings))
-                    {
-                        continue;
-                    }
+                    continue;
                 }
 
-                if (setBoots != null)
+                if (!playerBootsHasLore || !(playerBoots.getItemMeta().getLore().get(0).equals(setBoots.getItemMeta().getLore().get(0))))
                 {
-                    if (playerBoots == null || !playerBoots.equals(setBoots))
-                    {
-                        continue;
-                    }
+                    continue;
                 }
 
                 set.applyEffects(player);
