@@ -7,25 +7,27 @@ import me.mythicalflame.spigotmodding.functionalities.RecipeEventWatcher;
 import me.mythicalflame.spigotmodding.items.ModdedArmorSet;
 import me.mythicalflame.spigotmodding.items.ModdedConsumable;
 import me.mythicalflame.spigotmodding.items.ModdedItem;
+import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 public final class SpigotModding extends JavaPlugin
 {
+    private static final Logger logger = Logger.getLogger(SpigotModding.class.getName());
+
     //registeredItems - array to access all registered items
     private static ArrayList<ModdedItem> registeredItems = new ArrayList<>();
     //BELOW: ArrayLists holding specific item types. To be used for EventWatcher
     private static ArrayList<ModdedConsumable> consumables = new ArrayList<>();
     //armor sets - do not hold items
     private static ArrayList<ModdedArmorSet> registeredArmorSets = new ArrayList<>();
+
     @Override
     public void onEnable()
     {
-        // Plugin startup logic
-        System.out.println("[SpigotModding] Starting up SpigotModding plugin...");
-
         //Set up configuration
         getConfig().options().copyDefaults();
         saveDefaultConfig();
@@ -50,14 +52,7 @@ public final class SpigotModding extends JavaPlugin
         //Enable commands
         this.getCommand("spigotmodding").setExecutor(new CommandSpigotModding());
 
-        System.out.println("[SpigotModding] Finished starting up SpigotModding plugin");
-    }
-
-    @Override
-    public void onDisable()
-    {
-        // Plugin shutdown logic
-        System.out.println("[SpigotModding] Shutting down SpigotModding plugin...");
+        logger.info("Finished starting up!");
     }
 
     public static ArrayList<ModdedItem> getRegisteredItems()
@@ -117,7 +112,7 @@ public final class SpigotModding extends JavaPlugin
         {
             if (set.getPieces().length > 4)
             {
-                System.err.println("[SpigotModding] Failed to register armorsets! One of your armorsets has > 4 pieces.");
+                logger.severe("Failed to register armor sets! One of your armor set has more than 4 pieces.");
                 return false;
             }
         }
@@ -138,7 +133,7 @@ public final class SpigotModding extends JavaPlugin
         {
             if (!expectedNameSpace.equals(item.getNamespace()))
             {
-                System.err.println("[SpigotModding] Failed to register items! Expected namespace: " + expectedNameSpace + ", received namespace: " + item.getNamespace() + ".");
+                logger.severe("Failed to register items! Expected namespace: " + expectedNameSpace + ", received namespace: " + item.getNamespace() + ".");
                 return false;
             }
         }
@@ -152,7 +147,7 @@ public final class SpigotModding extends JavaPlugin
             }
         }
 
-        System.out.println("[SpigotModding] Successfully registered " + items.length + " items with namespace " + expectedNameSpace + ".");
+        logger.info("Successfully registered " + items.length + " items with namespace " + expectedNameSpace + ".");
         return true;
     }
 }
