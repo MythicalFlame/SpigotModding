@@ -156,7 +156,7 @@ public class CommandSpigotModding implements CommandExecutor
 
         receiver.getInventory().addItem(giveItem);
 
-        sender.sendMessage("Successfully added " + itemAmount + " of item \"" + itemFound.getItem().getItemMeta().getDisplayName() + "\" to player \"" + args[1] + "\"'s inventory.");
+        sender.sendMessage("Gave " + itemAmount + " [" + itemFound.getItem().getItemMeta().getDisplayName() + "] to " + args[1]);
     }
 
     //helper methods
