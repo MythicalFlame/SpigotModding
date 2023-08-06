@@ -12,6 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Logger;
 
 public final class SpigotModding extends JavaPlugin
@@ -95,10 +96,7 @@ public final class SpigotModding extends JavaPlugin
 
             if (armorSets != null)
             {
-                if (!registerArmorSets(armorSets))
-                {
-                    return false;
-                }
+                return registerArmorSets(armorSets);
             }
         }
 
@@ -117,10 +115,7 @@ public final class SpigotModding extends JavaPlugin
             }
         }
         //valid
-        for (ModdedArmorSet set : armorSets)
-        {
-            registeredArmorSets.add(set);
-        }
+        registeredArmorSets.addAll(Arrays.asList(armorSets));
 
         return true;
     }
