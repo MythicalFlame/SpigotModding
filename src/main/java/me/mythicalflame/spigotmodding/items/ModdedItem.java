@@ -3,6 +3,7 @@ package me.mythicalflame.spigotmodding.items;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -107,4 +108,5 @@ public class ModdedItem
     public void onLeftClick(PlayerInteractEvent event){}
     public void onRightClick(PlayerInteractEvent event){}
     public void onAttack(EntityDamageByEntityEvent event){}
+    public void onKill(EntityDeathEvent event){}
 }
