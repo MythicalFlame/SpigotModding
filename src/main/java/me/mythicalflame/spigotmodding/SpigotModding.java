@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 
 public final class SpigotModding extends JavaPlugin
 {
-    private static final Logger logger = Logger.getLogger(SpigotModding.class.getName());
+    private static SpigotModding plugin;
 
     //registeredItems - array to access all registered items
     private static ArrayList<ModdedItem> registeredItems = new ArrayList<>();
@@ -28,6 +28,9 @@ public final class SpigotModding extends JavaPlugin
     @Override
     public void onEnable()
     {
+        plugin = this;
+        Logger logger = getLogger();
+
         //Set up configuration
         getConfig().options().copyDefaults();
         saveDefaultConfig();
@@ -88,7 +91,7 @@ public final class SpigotModding extends JavaPlugin
     {
         if (items != null)
         {
-            if(!registerItems(items))
+            if (!registerItems(items))
             {
                 return false;
             }
@@ -104,6 +107,8 @@ public final class SpigotModding extends JavaPlugin
 
     private static boolean registerArmorSets(ModdedArmorSet[] armorSets)
     {
+        Logger logger = plugin.getLogger();
+
         //check validity
         for (ModdedArmorSet set : armorSets)
         {
@@ -121,6 +126,8 @@ public final class SpigotModding extends JavaPlugin
 
     private static boolean registerItems(ModdedItem[] items)
     {
+        Logger logger = plugin.getLogger();
+
         String expectedNameSpace = items[0].getNamespace();
         //check if all namespaces in the registerItems method are the same - different namespaces should be registered by a separate plugin!
         for (ModdedItem item : items)
