@@ -139,6 +139,12 @@ public class GeneralEventWatcher implements Listener
     {
         LivingEntity killed = event.getEntity();
         Player killer = killed.getKiller();
+
+        if (killer == null)
+        {
+            return;
+        }
+
         ItemStack hand = killer.getInventory().getItemInMainHand();
 
         ModdedItem itemUsed = null;
