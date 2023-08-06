@@ -2,12 +2,11 @@ package me.mythicalflame.spigotmodding;
 
 import me.mythicalflame.spigotmodding.commands.CommandSpigotModding;
 import me.mythicalflame.spigotmodding.functionalities.ArmorTask;
-import me.mythicalflame.spigotmodding.functionalities.ModdedItemFunctionalityEventWatcher;
+import me.mythicalflame.spigotmodding.functionalities.GeneralEventWatcher;
 import me.mythicalflame.spigotmodding.functionalities.RecipeEventWatcher;
 import me.mythicalflame.spigotmodding.items.ModdedArmorSet;
 import me.mythicalflame.spigotmodding.items.ModdedConsumable;
 import me.mythicalflame.spigotmodding.items.ModdedItem;
-import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -37,7 +36,7 @@ public final class SpigotModding extends JavaPlugin
         //If enabled, check for basic item functionality (clicking, attacking, eating...)
         if (getConfig().getBoolean("itemFunctionality"))
         {
-            getServer().getPluginManager().registerEvents(new ModdedItemFunctionalityEventWatcher(), this);
+            getServer().getPluginManager().registerEvents(new GeneralEventWatcher(), this);
         }
         //If enabled, cancel recipes that use custom items
         if (getConfig().getBoolean("cancelRecipes"))
