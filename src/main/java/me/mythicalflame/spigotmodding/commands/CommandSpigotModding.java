@@ -96,15 +96,7 @@ public class CommandSpigotModding implements CommandExecutor
 
     public void giveCommand(CommandSender sender, String[] args)
     {
-        if (!(sender instanceof Player))
-        {
-            sender.sendMessage(ChatColor.RED + "Only players may use the spigotmodding give command!");
-            return;
-        }
-
-        Player commandUser = (Player) sender;
-
-        if (!commandUser.hasPermission("spigotmodding.commandspigotmodding.give"))
+        if (!sender.hasPermission("spigotmodding.commandspigotmodding.give"))
         {
             sender.sendMessage(ChatColor.RED + "You do not have permission to use the spigotmodding give command!");
             return;
