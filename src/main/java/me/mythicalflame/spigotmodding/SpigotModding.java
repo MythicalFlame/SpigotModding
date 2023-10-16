@@ -1,56 +1,30 @@
 package me.mythicalflame.spigotmodding;
 
 import me.mythicalflame.spigotmodding.commands.CommandSpigotModding;
-import me.mythicalflame.spigotmodding.functionalities.ArmorTask;
-import me.mythicalflame.spigotmodding.functionalities.GeneralEventWatcher;
-import me.mythicalflame.spigotmodding.functionalities.RecipeEventWatcher;
-import me.mythicalflame.spigotmodding.items.ModdedArmorSet;
-import me.mythicalflame.spigotmodding.items.ModdedConsumable;
 import me.mythicalflame.spigotmodding.items.ModdedItem;
+import me.mythicalflame.spigotmodding.utilities.Mod;
+import me.mythicalflame.spigotmodding.utilities.ModRegister;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitTask;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.logging.Logger;
 
 public final class SpigotModding extends JavaPlugin
 {
-    private static SpigotModding plugin;
-
-    //registeredItems - array to access all registered items
-    private static ArrayList<ModdedItem> registeredItems = new ArrayList<>();
-    //BELOW: ArrayLists holding specific item types. To be used for EventWatcher
-    private static ArrayList<ModdedConsumable> consumables = new ArrayList<>();
-    //armor sets - do not hold items
-    private static ArrayList<ModdedArmorSet> registeredArmorSets = new ArrayList<>();
+    private static Plugin plugin;
+    private static Logger logger;
+    private static ArrayList<Mod> registeredMods = new ArrayList<>();
 
     @Override
     public void onEnable()
     {
         plugin = this;
-        Logger logger = getLogger();
+        logger = getLogger();
 
         //Set up configuration
         getConfig().options().copyDefaults();
         saveDefaultConfig();
-
-        //Check configuration
-        //If enabled, check for basic item functionality (clicking, attacking, eating...)
-        if (getConfig().getBoolean("itemFunctionality"))
-        {
-            getServer().getPluginManager().registerEvents(new GeneralEventWatcher(), this);
-        }
-        //If enabled, cancel recipes that use custom items
-        if (getConfig().getBoolean("cancelRecipes"))
-        {
-            getServer().getPluginManager().registerEvents(new RecipeEventWatcher(), this);
-        }
-        //If enabled, watch for custom armor wearing
-        if (getConfig().getBoolean("armorFunctionality"))
-        {
-            BukkitTask armorTask = new ArmorTask(this).runTaskTimer(this, 100, 200);
-        }
 
         //Enable commands
         this.getCommand("spigotmodding").setExecutor(new CommandSpigotModding());
@@ -58,97 +32,36 @@ public final class SpigotModding extends JavaPlugin
         logger.info("Finished starting up!");
     }
 
-    public static ArrayList<ModdedItem> getRegisteredItems()
+    public static ArrayList<Mod> getRegisteredMods()
     {
-        return registeredItems;
+        return registeredMods;
     }
 
-    public static ArrayList<ModdedConsumable> getConsumables()
+    //registration of mod objects
+    public static boolean registerMod(Mod mod)
     {
-        return consumables;
-    }
-
-    public static ArrayList<ModdedArmorSet> getRegisteredArmorSets()
-    {
-        return registeredArmorSets;
-    }
-
-    public static ModdedItem getRegisteredItem(String namespace, String ID)
-    {
-        for (ModdedItem item : registeredItems)
+        for (Mod i : registeredMods)
         {
-            if (item.getNamespace().equalsIgnoreCase(namespace) && item.getID().equalsIgnoreCase(ID))
+            if (i.getNamespace().equalsIgnoreCase(mod.getNamespace()))
             {
-                return item;
-            }
-        }
-
-        return null;
-    }
-
-    //registration of all modded content
-    public static boolean registerMods(ModdedItem[] items, ModdedArmorSet[] armorSets)
-    {
-        if (items != null)
-        {
-            if (!registerItems(items))
-            {
-                return false;
-            }
-
-            if (armorSets != null)
-            {
-                return registerArmorSets(armorSets);
-            }
-        }
-
-        return true;
-    }
-
-    private static boolean registerArmorSets(ModdedArmorSet[] armorSets)
-    {
-        Logger logger = plugin.getLogger();
-
-        //check validity
-        for (ModdedArmorSet set : armorSets)
-        {
-            if (set.getPieces().length > 4)
-            {
-                logger.severe("Failed to register armor sets! One of your armor set has more than 4 pieces.");
+                logger.warning("Could not register mod \"" + mod.getDisplayName() + "\" due to namespace \"" + mod.getNamespace() + "\" being already used!");
                 return false;
             }
         }
-        //valid
-        registeredArmorSets.addAll(Arrays.asList(armorSets));
 
-        return true;
-    }
-
-    private static boolean registerItems(ModdedItem[] items)
-    {
-        Logger logger = plugin.getLogger();
-
-        String expectedNameSpace = items[0].getNamespace();
-        //check if all namespaces in the registerItems method are the same - different namespaces should be registered by a separate plugin!
-        for (ModdedItem item : items)
+        for (ModdedItem item : mod.getRegisteredItems())
         {
-            if (!expectedNameSpace.equals(item.getNamespace()))
+            if (!item.getNamespace().equals(mod.getNamespace()))
             {
-                logger.severe("Failed to register items! Expected namespace: " + expectedNameSpace + ", received namespace: " + item.getNamespace() + ".");
+                logger.warning("Could not register mod \"" + mod.getDisplayName() + "\" due to multiple namespaces being used!");
                 return false;
             }
         }
-        //If all namespaces are the same, add the items
-        for (ModdedItem item : items)
-        {
-            registeredItems.add(item);
-            if (item instanceof ModdedConsumable)
-            {
-                consumables.add((ModdedConsumable) item);
-            }
-        }
 
-        logger.info("Successfully registered " + items.length + " items with namespace " + expectedNameSpace + ".");
+        ModRegister.register(mod, plugin);
+
+        registeredMods.add(mod);
+
         return true;
     }
 }

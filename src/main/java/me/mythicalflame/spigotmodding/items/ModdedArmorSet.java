@@ -1,40 +1,37 @@
 package me.mythicalflame.spigotmodding.items;
 
-import me.mythicalflame.spigotmodding.utilities.ArmorSetEffect;
+import me.mythicalflame.spigotmodding.exceptions.ArmorSetChoicesException;
+import me.mythicalflame.spigotmodding.utilities.ArmorChoice;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffect;
-
-import java.util.ArrayList;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerItemConsumeEvent;
 
 public class ModdedArmorSet
 {
     //TODO: allow armor pieces to have modified protection amounts
-    //pieces should hold 4 moddedarmorpiece objects (null = no piece requirement for that slot). Index 0 indicates the helmet, index 1 the chestplate, index 2 the leggings, and index 3 the boots.
-    private final ModdedArmorPiece[] pieces;
-    private final ArmorSetEffect setEffects;
+    //pieces should hold 4 ArmorChoice objects. Index 0 indicates the helmet, index 1 the chestplate, index 2 the leggings, and index 3 the boots.
+    private final ArmorChoice[] choices;
 
-    public ModdedArmorSet(ModdedArmorPiece[] pieces, ArmorSetEffect setEffects)
+    public ModdedArmorSet(ArmorChoice[] choices)
     {
-        this.setEffects = setEffects;
-        this.pieces = pieces;
-    }
-
-    public ModdedArmorPiece[] getPieces()
-    {
-        return pieces;
-    }
-
-    public ArmorSetEffect getSetEffects()
-    {
-        return setEffects;
-    }
-
-    //classes cannot override this method, but in the future ArmorSetEffects will give you more behavior.
-    public final void applyEffects(Player player)
-    {
-        for (PotionEffect effect : setEffects.getEffects())
+        if (choices.length != 4)
         {
-            player.addPotionEffect(effect);
+            throw new ArmorSetChoicesException("Attempted to initialize ModdedArmorSet object with an armor choice array that is length" + choices.length + "instead of length 4!");
         }
+
+        this.choices = choices;
     }
+
+    public ArmorChoice[] getChoices()
+    {
+        return choices;
+    }
+
+    public void onTick(Player player) {}
+    public void onInteract(PlayerInteractEvent event) {}
+    public void onKill(EntityDeathEvent event) {}
+    public void onAttack(EntityDamageByEntityEvent event) {}
+    public void onConsume(PlayerItemConsumeEvent event) {}
 }

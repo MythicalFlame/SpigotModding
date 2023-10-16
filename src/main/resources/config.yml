@@ -1,20 +1,3 @@
 # SPIGOTMODDING configuration
 # This file allows you to change how the spigotmodding plugin works
-
-# FUNCTIONALITY
-# This section allows you to enable or disable functionalities. This may improve performance in some cases
-# WARNING: disabling any functionality may break mods that use that functionality
-
-# This setting determines whether the plugin should check if you are holding a custom item while performing certain actions
-# These actions include: clicking, attacking, jumping, and eating
-itemFunctionality: true
-
-# This setting determines whether recipes that involve custom items will be cancelled or not
-# If this is enabled, custom recipes will not work
-# However, if it is disabled, vanilla recipes will accept your custom recipe as an ingredient
-# We are currently working to find a way to allow custom recipes while blocking vanilla recipes
-cancelRecipes: false
-
-# This setting determines whether custom armor functionality is enabled
-# Custom armor set effects are run every 10 seconds. It should not have an extremely large impact on your performance
-armorFunctionality: true
+# There are no options currently, as they were all removed when the 0.7.0 update introduced the smart listener system.

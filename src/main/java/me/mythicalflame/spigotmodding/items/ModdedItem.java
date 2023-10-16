@@ -1,7 +1,9 @@
 package me.mythicalflame.spigotmodding.items;
 
+import me.mythicalflame.spigotmodding.utilities.EventType;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -16,46 +18,14 @@ public class ModdedItem
     private final String ID;
     private final Material MATERIAL;
     private final ItemStack ITEM;
-    //private final VanillaInteractionOption VANILLA_INTERACTIONS;
-    private final Integer CUSTOM_MODEL_DATA;
-    /*private final CustomRecipe[] RECIPES;*/
-    //constructors
-    //without customModelData
-    public ModdedItem(String namespace, String ID, Material material, String name/*, CustomRecipe[] recipes*/)
+    private final int CUSTOM_MODEL_DATA;
+
+    public ModdedItem(String namespace, String id, Material material, String name, int customModelData)
     {
-        this.NAMESPACE = namespace;
-        this.ID = ID;
-        this.MATERIAL = material;
-        /*RECIPES = recipes;*/
-        this.CUSTOM_MODEL_DATA = null;
-
-        ItemStack constructorItemStack = new ItemStack(material);
-
-        ItemMeta moddedItemMeta = constructorItemStack.getItemMeta();
-        //Name without italics
-        moddedItemMeta.setDisplayName(ChatColor.RESET + name);
-        /* Lore for ModdedItem
-            First line - "namespace:id" (used to check if items are equivalent after given custom lore or renamed
-            Second line - extra lore
-         */
-        ArrayList<String> moddedItemLore = new ArrayList<>();
-        moddedItemLore.add(namespace.toLowerCase() + ":" + ID.toLowerCase());
-        moddedItemMeta.setLore(moddedItemLore);
-
-        moddedItemMeta.setCustomModelData(CUSTOM_MODEL_DATA);
-
-        constructorItemStack.setItemMeta(moddedItemMeta);
-
-        ITEM = constructorItemStack;
-    }
-    //with customModelData
-    public ModdedItem(String namespace, String ID, Material material, String name, /*CustomRecipe[] recipes,*/ int customModelData)
-    {
-        this.NAMESPACE = namespace;
-        this.ID = ID;
-        this.MATERIAL = material;
-        /*RECIPES = recipes;*/
-        this.CUSTOM_MODEL_DATA = customModelData;
+        NAMESPACE = namespace.toLowerCase();
+        ID = id.toLowerCase();
+        MATERIAL = material;
+        CUSTOM_MODEL_DATA = customModelData;
 
         ItemStack constructorItemStack = new ItemStack(material);
 
@@ -67,7 +37,7 @@ public class ModdedItem
             Second line - extra lore
         */
         ArrayList<String> moddedItemLore = new ArrayList<>();
-        moddedItemLore.add(namespace.toLowerCase() + ":" + ID.toLowerCase());
+        moddedItemLore.add(NAMESPACE + ":" + ID);
         moddedItemMeta.setLore(moddedItemLore);
 
         moddedItemMeta.setCustomModelData(CUSTOM_MODEL_DATA);
@@ -76,11 +46,9 @@ public class ModdedItem
 
         ITEM = constructorItemStack;
     }
-    //get/set
-    public String getNamespace()
-    {
-        return NAMESPACE;
-    }
+
+    //getters
+    public String getNamespace() { return NAMESPACE; }
 
     public String getID()
     {
@@ -99,14 +67,14 @@ public class ModdedItem
 
     /*public CustomRecipe[] getRecipes() { return RECIPES; }*/
 
-    public Integer getCustomModelData()
+    public int getCustomModelData()
     {
         return CUSTOM_MODEL_DATA;
     }
 
     //Events to override
-    public void onLeftClick(PlayerInteractEvent event){}
-    public void onRightClick(PlayerInteractEvent event){}
-    public void onAttack(EntityDamageByEntityEvent event){}
-    public void onKill(EntityDeathEvent event){}
+    public void onTick(Player player) {}
+    public void onInteract(PlayerInteractEvent event, EventType type) {}
+    public void onKill(EntityDeathEvent event, EventType type){}
+    public void onAttack(EntityDamageByEntityEvent event, EventType type){}
 }

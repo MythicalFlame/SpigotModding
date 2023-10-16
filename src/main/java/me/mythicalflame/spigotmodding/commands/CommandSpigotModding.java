@@ -24,13 +24,19 @@ public class CommandSpigotModding implements CommandExecutor
         switch (args[0].toLowerCase())
         {
             case "items":
-                itemsCommand(sender);
+                ItemsSubCommand.itemsSubCommand(sender);
                 break;
             case "item":
-                itemCommand(sender, args);
+                ItemSubCommand.itemSubCommand(sender, args);
                 break;
             case "give":
-                giveCommand(sender, args);
+                GiveSubCommand.giveSubCommand(sender, args);
+                break;
+            case "mod":
+                ModSubCommand.modSubCommand(sender, args);
+                break;
+            case "mods":
+                ModsSubCommand.modsSubCommand(sender);
                 break;
             default:
                 helpMessage(sender);
@@ -38,117 +44,6 @@ public class CommandSpigotModding implements CommandExecutor
         }
 
         return true;
-    }
-
-    public void itemsCommand(CommandSender sender)
-    {
-        if (!sender.hasPermission("spigotmodding.commandspigotmodding.items"))
-        {
-            sender.sendMessage(ChatColor.RED + "You do not have permission to use the spigotmodding items command!");
-            return;
-        }
-
-        String result = ChatColor.GOLD + "SpigotModding Registered Items:\n" + ChatColor.RESET;
-        for (ModdedItem item : SpigotModding.getRegisteredItems())
-        {
-            result += item.getNamespace() + ":" + item.getID() + ", ";
-        }
-
-        sender.sendMessage(result);
-    }
-
-    //subcommand methods
-    public void itemCommand(CommandSender sender, String[] args)
-    {
-        if (args.length < 2)
-        {
-            sender.sendMessage(ChatColor.RED + "/spigotmodding item <itemNamespace:itemID>");
-            return;
-        }
-
-        if (!sender.hasPermission("spigotmodding.commandspigotmodding.item"))
-        {
-            sender.sendMessage(ChatColor.RED + "You do not have permission to use the spigotmodding item command!");
-            return;
-        }
-
-        //index 0 = namespace, index 1 = ID
-        String[] itemEntered = args[1].split(":");
-
-        //ensure that itemEntered has 2 elements (correct input from command sender)
-        if (itemEntered.length != 2)
-        {
-            sender.sendMessage(ChatColor.RED + "/spigotmodding item <itemNamespace:itemID>");
-            return;
-        }
-
-        ModdedItem itemFound = SpigotModding.getRegisteredItem(itemEntered[0], itemEntered[1]);
-
-        if (itemFound == null)
-        {
-            sender.sendMessage(ChatColor.RED + "Could not find item \"" + itemEntered[0].toLowerCase() + ":" + itemEntered[1].toLowerCase() + "\"");
-        }
-        else
-        {
-            sender.sendMessage(ChatColor.GOLD + "SpigotModding Item Inspection Results:\n" + ChatColor.RESET + "Name: " + itemFound.getItem().getItemMeta().getDisplayName() + "\nNamespace: " + itemFound.getNamespace() + "\nID: " + itemFound.getID() + "\nMaterial: " + itemFound.getMaterial() + "\nCustom Model Data: " + itemFound.getCustomModelData());
-        }
-    }
-
-    public void giveCommand(CommandSender sender, String[] args)
-    {
-        if (!sender.hasPermission("spigotmodding.commandspigotmodding.give"))
-        {
-            sender.sendMessage(ChatColor.RED + "You do not have permission to use the spigotmodding give command!");
-            return;
-        }
-
-        if (args.length < 3)
-        {
-            sender.sendMessage(ChatColor.DARK_GREEN + "/spigotmodding give <playerName> <itemNamespace:itemID> [amount]");
-            return;
-        }
-
-        /*get player*/
-        Player receiver = Bukkit.getPlayer(args[1]);
-
-        if (receiver == null)
-        {
-            sender.sendMessage(ChatColor.RED + "Could not find online player \"" + args[1] + "\"");
-            return;
-        }
-
-        /*get item*/
-        //index 0 = namespace, index 1 = ID
-        String[] itemEntered = args[2].split(":");
-
-        //ensure that itemEntered has 2 elements (correct input from command sender)
-        if (itemEntered.length != 2)
-        {
-            sender.sendMessage(ChatColor.RED + "/spigotmodding give <playerName> <itemNamespace:itemID> [amount]");
-            return;
-        }
-
-        ModdedItem itemFound = SpigotModding.getRegisteredItem(itemEntered[0], itemEntered[1]);
-
-        if (itemFound == null)
-        {
-            sender.sendMessage(ChatColor.RED + "Could not find item \"" + itemEntered[0].toLowerCase() + ":" + itemEntered[1].toLowerCase() + "\"");
-            return;
-        }
-
-        /*give item*/
-        int itemAmount = 1;
-        if (args.length > 3)
-        {
-            itemAmount = Integer.parseInt(args[3]);
-        }
-
-        ItemStack giveItem = itemFound.getItem();
-        giveItem.setAmount(itemAmount);
-
-        receiver.getInventory().addItem(giveItem);
-
-        sender.sendMessage("Gave " + itemAmount + " [" + itemFound.getItem().getItemMeta().getDisplayName() + "] to " + args[1]);
     }
 
     //helper methods
