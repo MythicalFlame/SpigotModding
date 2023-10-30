@@ -29,9 +29,9 @@ public abstract class ModdedArmorSet
         return choices;
     }
 
-    public abstract void onTick(Player player);
-    public abstract void onInteract(PlayerInteractEvent event);
-    public abstract void onKill(EntityDeathEvent event);
-    public abstract void onAttack(EntityDamageByEntityEvent event);
-    public abstract void onConsume(PlayerItemConsumeEvent event);
+    public void onTick(Player player) {}
+    public void onInteract(PlayerInteractEvent event) {}
+    public void onKill(EntityDeathEvent event) {}
+    public void onAttack(EntityDamageByEntityEvent event) {}
+    public void onConsume(PlayerItemConsumeEvent event) {}
 }

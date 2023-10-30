@@ -76,8 +76,8 @@ public abstract class ModdedItem
     }
 
     //Events to override
-    public abstract void onTick(Player player);
-    public abstract void onInteract(PlayerInteractEvent event, EventType type);
-    public abstract void onKill(EntityDeathEvent event, EventType type);
-    public abstract void onAttack(EntityDamageByEntityEvent event, EventType type);
+    public void onTick(Player player) {}
+    public void onInteract(PlayerInteractEvent event, EventType type) {}
+    public void onKill(EntityDeathEvent event, EventType type) {}
+    public void onAttack(EntityDamageByEntityEvent event, EventType type) {}
 }

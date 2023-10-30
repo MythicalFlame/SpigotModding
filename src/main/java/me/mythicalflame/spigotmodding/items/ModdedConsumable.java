@@ -18,5 +18,5 @@ public abstract class ModdedConsumable extends ModdedItem
         }
     }
 
-    public abstract void onConsume(PlayerItemConsumeEvent event);
+    public void onConsume(PlayerItemConsumeEvent event) {}
 }
