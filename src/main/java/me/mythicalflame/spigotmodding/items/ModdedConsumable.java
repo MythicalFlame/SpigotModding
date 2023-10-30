@@ -4,11 +4,13 @@ import me.mythicalflame.spigotmodding.exceptions.NotConsumableException;
 import org.bukkit.Material;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 
-public class ModdedConsumable extends ModdedItem
+import java.util.List;
+
+public abstract class ModdedConsumable extends ModdedItem
 {
-    public ModdedConsumable(String namespace, String ID, Material material, String name, /*CustomRecipe[] recipes,*/ int customModelData)
+    public ModdedConsumable(String namespace, String ID, Material material, String name, /*CustomRecipe[] recipes,*/ int customModelData, List<String> lore)
     {
-        super(namespace, ID, material, name, /*recipes,*/ customModelData);
+        super(namespace, ID, material, name, customModelData, lore);
 
         if (!material.isEdible())
         {
@@ -16,5 +18,5 @@ public class ModdedConsumable extends ModdedItem
         }
     }
 
-    public void onConsume(PlayerItemConsumeEvent event){}
+    public abstract void onConsume(PlayerItemConsumeEvent event);
 }

@@ -8,7 +8,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 
-public class ModdedArmorSet
+public abstract class ModdedArmorSet
 {
     //TODO: allow armor pieces to have modified protection amounts
     //pieces should hold 4 ArmorChoice objects. Index 0 indicates the helmet, index 1 the chestplate, index 2 the leggings, and index 3 the boots.
@@ -29,9 +29,9 @@ public class ModdedArmorSet
         return choices;
     }
 
-    public void onTick(Player player) {}
-    public void onInteract(PlayerInteractEvent event) {}
-    public void onKill(EntityDeathEvent event) {}
-    public void onAttack(EntityDamageByEntityEvent event) {}
-    public void onConsume(PlayerItemConsumeEvent event) {}
+    public abstract void onTick(Player player);
+    public abstract void onInteract(PlayerInteractEvent event);
+    public abstract void onKill(EntityDeathEvent event);
+    public abstract void onAttack(EntityDamageByEntityEvent event);
+    public abstract void onConsume(PlayerItemConsumeEvent event);
 }

@@ -5,6 +5,7 @@ import me.mythicalflame.spigotmodding.functionalities.EntityDeathEventWatcher;
 import me.mythicalflame.spigotmodding.functionalities.ModTickTask;
 import me.mythicalflame.spigotmodding.functionalities.PlayerInteractEventWatcher;
 import me.mythicalflame.spigotmodding.functionalities.PlayerItemConsumeEventWatcher;
+import me.mythicalflame.spigotmodding.items.ModdedArmorPiece;
 import me.mythicalflame.spigotmodding.items.ModdedArmorSet;
 import me.mythicalflame.spigotmodding.items.ModdedConsumable;
 import me.mythicalflame.spigotmodding.items.ModdedItem;
@@ -14,7 +15,9 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.scheduler.BukkitTask;
+
+import java.util.Arrays;
+import java.util.HashSet;
 
 public class ModRegister
 {
@@ -26,7 +29,7 @@ public class ModRegister
         3 - EntityDeathEventWatcher
         4 - EntityDamageByEntityEventWatcher
      */
-    private static boolean[] registered = new boolean[5];
+    private static final boolean[] registered = new boolean[5];
 
     public static void register(Mod mod, Plugin plugin)
     {
@@ -39,15 +42,17 @@ public class ModRegister
         for (ModdedArmorSet set : mod.getRegisteredArmor())
         {
             Class<? extends ModdedArmorSet> clazz = set.getClass();
+            Class<ModdedArmorSet> defaultClazz = ModdedArmorSet.class;
 
             //ModTickTask
             try
             {
-                if (clazz.getMethod("onTick", Player.class).getDeclaringClass().equals(clazz))
+                if (!clazz.getMethod("onTick", Player.class).getDeclaringClass().equals(defaultClazz))
                 {
                     if (!registered[0])
                     {
-                        BukkitTask task = new ModTickTask().runTaskTimer(plugin, 100, 1);
+                        registered[0] = true;
+                        new ModTickTask().runTaskTimer(plugin, 100, 1);
                     }
 
                     ModTickTask.addArmor(set);
@@ -58,10 +63,11 @@ public class ModRegister
             //PlayerInteractEventWatcher
             try
             {
-                if (clazz.getMethod("onInteract", PlayerInteractEvent.class).getDeclaringClass().equals(clazz))
+                if (!clazz.getMethod("onInteract", PlayerInteractEvent.class).getDeclaringClass().equals(defaultClazz))
                 {
                     if (!registered[1])
                     {
+                        registered[1] = true;
                         plugin.getServer().getPluginManager().registerEvents(new PlayerInteractEventWatcher(), plugin);
                     }
 
@@ -73,10 +79,11 @@ public class ModRegister
             //PlayerItemConsumeEventWatcher
             try
             {
-                if (clazz.getMethod("onConsume", PlayerItemConsumeEvent.class).getDeclaringClass().equals(clazz))
+                if (!clazz.getMethod("onConsume", PlayerItemConsumeEvent.class).getDeclaringClass().equals(defaultClazz))
                 {
                     if (!registered[2])
                     {
+                        registered[2] = true;
                         plugin.getServer().getPluginManager().registerEvents(new PlayerItemConsumeEventWatcher(), plugin);
                     }
 
@@ -88,10 +95,11 @@ public class ModRegister
             //EntityDeathEventWatcher
             try
             {
-                if (clazz.getMethod("onKill", EntityDeathEvent.class).getDeclaringClass().equals(clazz))
+                if (!clazz.getMethod("onKill", EntityDeathEvent.class).getDeclaringClass().equals(defaultClazz))
                 {
                     if (!registered[3])
                     {
+                        registered[3] = true;
                         plugin.getServer().getPluginManager().registerEvents(new EntityDeathEventWatcher(), plugin);
                     }
 
@@ -103,10 +111,11 @@ public class ModRegister
             //EntityDamageByEntityEventWatcher
             try
             {
-                if (clazz.getMethod("onAttack", EntityDamageByEntityEvent.class).getDeclaringClass().equals(clazz))
+                if (!clazz.getMethod("onAttack", EntityDamageByEntityEvent.class).getDeclaringClass().equals(defaultClazz))
                 {
                     if (!registered[4])
                     {
+                        registered[4] = true;
                         plugin.getServer().getPluginManager().registerEvents(new EntityDamageByEntityEventWatcher(), plugin);
                     }
 
@@ -122,15 +131,18 @@ public class ModRegister
         for (ModdedItem item : mod.getRegisteredItems())
         {
             Class<? extends ModdedItem> clazz = item.getClass();
+            Class[] defaultValues = {ModdedItem.class, ModdedConsumable.class, ModdedArmorPiece.class, ModdedArmorSet.class};
+            HashSet<Class> defaultSet = new HashSet<>(Arrays.asList(defaultValues));
 
             //ModTickTask
             try
             {
-                if (clazz.getMethod("onTick", Player.class).getDeclaringClass().equals(clazz))
+                if (!defaultSet.contains(clazz.getMethod("onTick", Player.class).getDeclaringClass()))
                 {
                     if (!registered[0])
                     {
-                        BukkitTask task = new ModTickTask().runTaskTimer(plugin, 100, 1);
+                        registered[0] = true;
+                        new ModTickTask().runTaskTimer(plugin, 100, 1);
                     }
 
                     ModTickTask.addItem(item);
@@ -141,10 +153,11 @@ public class ModRegister
             //PlayerInteractEventWatcher
             try
             {
-                if (clazz.getMethod("onInteract", PlayerInteractEvent.class, EventType.class).getDeclaringClass().equals(clazz))
+                if (!defaultSet.contains(clazz.getMethod("onInteract", PlayerInteractEvent.class, EventType.class).getDeclaringClass()))
                 {
                     if (!registered[1])
                     {
+                        registered[1] = true;
                         plugin.getServer().getPluginManager().registerEvents(new PlayerInteractEventWatcher(), plugin);
                     }
 
@@ -159,10 +172,11 @@ public class ModRegister
                 Class<? extends ModdedConsumable> consumeClazz = ((ModdedConsumable) item).getClass();
                 try
                 {
-                    if (consumeClazz.getMethod("onConsume", PlayerItemConsumeEvent.class).getDeclaringClass().equals(consumeClazz))
+                    if (!consumeClazz.getMethod("onConsume", PlayerItemConsumeEvent.class).getDeclaringClass().equals(ModdedConsumable.class))
                     {
                         if (!registered[2])
                         {
+                            registered[2] = true;
                             plugin.getServer().getPluginManager().registerEvents(new PlayerItemConsumeEventWatcher(), plugin);
                         }
 
@@ -175,10 +189,11 @@ public class ModRegister
             //EntityDeathEventWatcher
             try
             {
-                if (clazz.getMethod("onKill", EntityDeathEvent.class, EventType.class).getDeclaringClass().equals(clazz))
+                if (!defaultSet.contains(clazz.getMethod("onKill", EntityDeathEvent.class, EventType.class).getDeclaringClass()))
                 {
                     if (!registered[3])
                     {
+                        registered[3] = true;
                         plugin.getServer().getPluginManager().registerEvents(new EntityDeathEventWatcher(), plugin);
                     }
 
@@ -190,10 +205,11 @@ public class ModRegister
             //EntityDamageByEntityEventWatcher
             try
             {
-                if (clazz.getMethod("onAttack", EntityDamageByEntityEvent.class, EventType.class).getDeclaringClass().equals(clazz))
+                if (defaultSet.contains(clazz.getMethod("onAttack", EntityDamageByEntityEvent.class, EventType.class).getDeclaringClass()))
                 {
                     if (!registered[4])
                     {
+                        registered[4] = true;
                         plugin.getServer().getPluginManager().registerEvents(new EntityDamageByEntityEventWatcher(), plugin);
                     }
 

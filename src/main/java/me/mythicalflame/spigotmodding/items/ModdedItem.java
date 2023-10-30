@@ -11,8 +11,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class ModdedItem
+public abstract class ModdedItem
 {
     private final String NAMESPACE;
     private final String ID;
@@ -20,7 +21,7 @@ public class ModdedItem
     private final ItemStack ITEM;
     private final int CUSTOM_MODEL_DATA;
 
-    public ModdedItem(String namespace, String id, Material material, String name, int customModelData)
+    public ModdedItem(String namespace, String id, Material material, String name, int customModelData, List<String> lore)
     {
         NAMESPACE = namespace.toLowerCase();
         ID = id.toLowerCase();
@@ -30,22 +31,24 @@ public class ModdedItem
         ItemStack constructorItemStack = new ItemStack(material);
 
         ItemMeta moddedItemMeta = constructorItemStack.getItemMeta();
+
         //Name without italics
         moddedItemMeta.setDisplayName(ChatColor.RESET + name);
-        /* Lore for ModdedItem
-            First line - "namespace:id" (used to check if items are equivalent after given custom lore or renamed
-            Second line - extra lore
-        */
+
         ArrayList<String> moddedItemLore = new ArrayList<>();
         moddedItemLore.add(NAMESPACE + ":" + ID);
+        moddedItemLore.addAll(lore);
         moddedItemMeta.setLore(moddedItemLore);
 
         moddedItemMeta.setCustomModelData(CUSTOM_MODEL_DATA);
 
         constructorItemStack.setItemMeta(moddedItemMeta);
 
-        ITEM = constructorItemStack;
+        ITEM = finalizeItem(constructorItemStack);
     }
+
+    //mods can override this for custom behavior
+    public ItemStack finalizeItem(ItemStack stack) { return stack; }
 
     //getters
     public String getNamespace() { return NAMESPACE; }
@@ -73,8 +76,8 @@ public class ModdedItem
     }
 
     //Events to override
-    public void onTick(Player player) {}
-    public void onInteract(PlayerInteractEvent event, EventType type) {}
-    public void onKill(EntityDeathEvent event, EventType type){}
-    public void onAttack(EntityDamageByEntityEvent event, EventType type){}
+    public abstract void onTick(Player player);
+    public abstract void onInteract(PlayerInteractEvent event, EventType type);
+    public abstract void onKill(EntityDeathEvent event, EventType type);
+    public abstract void onAttack(EntityDamageByEntityEvent event, EventType type);
 }
