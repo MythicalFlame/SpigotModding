@@ -61,7 +61,7 @@ public abstract class ModdedItem
     }
 
     //mods can override this for custom behavior
-    private ItemStack finalizeItem(ItemStack stack) { return stack; }
+    protected ItemStack finalizeItem(ItemStack stack) { return stack; }
 
     //getters
     public final String getNamespace() { return NAMESPACE; }
