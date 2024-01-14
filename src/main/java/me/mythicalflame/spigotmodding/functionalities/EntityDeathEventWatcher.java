@@ -15,8 +15,8 @@ import java.util.Objects;
 
 public class EntityDeathEventWatcher implements Listener
 {
-    private static ArrayList<ModdedItem> items = new ArrayList<>();
-    private static ArrayList<ModdedArmorSet> armorSets = new ArrayList<>();
+    private static final ArrayList<ModdedItem> items = new ArrayList<>();
+    private static final ArrayList<ModdedArmorSet> armorSets = new ArrayList<>();
 
     //This event listens for when the player kills another entity, not when the player themselves are killed.
     @EventHandler

@@ -39,7 +39,7 @@ public class ItemSubCommand
         }
         else
         {
-            sender.sendMessage(ChatColor.GOLD + "SpigotModding Item Inspection Results:\n" + ChatColor.RESET + "Mod : " + SpigotModdingAPI.getMod(itemFound.getNamespace()).getDisplayName() + "\nName: " + itemFound.getItem().getItemMeta().getDisplayName() + "\nNamespace: " + itemFound.getNamespace() + "\nID: " + itemFound.getID() + "\nMaterial: " + itemFound.getMaterial() + "\nCustom Model Data: " + itemFound.getCustomModelData());
+            sender.sendMessage(ChatColor.GOLD + "SpigotModding Item Inspection Results:\n" + ChatColor.RESET + "Mod : " + SpigotModdingAPI.getMod(itemFound.getNamespace()).getDisplayName() + "\nName: " + itemFound.getItem().getItemMeta().getDisplayName() + "\nNamespace: " + itemFound.getNamespace() + "\nID: " + itemFound.getID() + "\nMaterial: " + itemFound.getMaterial() + "\nCustom Model Data: " + itemFound.getItem().getItemMeta().getCustomModelData());
         }
     }
 }

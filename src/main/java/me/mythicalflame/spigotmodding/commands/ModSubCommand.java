@@ -1,6 +1,5 @@
 package me.mythicalflame.spigotmodding.commands;
 
-import me.mythicalflame.spigotmodding.SpigotModding;
 import me.mythicalflame.spigotmodding.items.ModdedArmorSet;
 import me.mythicalflame.spigotmodding.items.ModdedItem;
 import me.mythicalflame.spigotmodding.utilities.Mod;
@@ -32,11 +31,11 @@ public class ModSubCommand
             return;
         }
 
-        String result = ChatColor.GOLD + "SpigotModding Mod Inspection Results:\n" + ChatColor.RESET + "Name: " + mod.getDisplayName() + "\nNamespace: " + mod.getNamespace() + "\nRegistered Items: ";
+        StringBuilder result = new StringBuilder(ChatColor.GOLD + "SpigotModding Mod Inspection Results:\n" + ChatColor.RESET + "Name: " + mod.getDisplayName() + "\nNamespace: " + mod.getNamespace() + "\nRegistered Items: ");
 
         if (mod.getRegisteredItems().size() == 0)
         {
-            result += "None";
+            result.append("None");
         }
         else
         {
@@ -44,20 +43,20 @@ public class ModSubCommand
             {
                 ModdedItem item = mod.getRegisteredItems().get(i);
 
-                result += item.getNamespace() + ":" + item.getID();
+                result.append(item.getNamespace()).append(":").append(item.getID());
 
                 if (i < mod.getRegisteredItems().size() - 1)
                 {
-                    result += ", ";
+                    result.append(", ");
                 }
             }
         }
 
-        result += "\nRegistered Armor Sets: ";
+        result.append("\nRegistered Armor Sets: ");
 
         if (mod.getRegisteredArmor().size() == 0)
         {
-            result += "None";
+            result.append("None");
         }
         else
         {
@@ -65,15 +64,15 @@ public class ModSubCommand
             {
                 ModdedArmorSet set = mod.getRegisteredArmor().get(i);
 
-                result += set.getClass().getSimpleName();
+                result.append(set.getClass().getSimpleName());
 
                 if (i < mod.getRegisteredArmor().size() - 1)
                 {
-                    result += ", ";
+                    result.append(", ");
                 }
             }
         }
 
-        sender.sendMessage(result);
+        sender.sendMessage(result.toString());
     }
 }

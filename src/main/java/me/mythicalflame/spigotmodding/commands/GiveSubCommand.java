@@ -1,6 +1,5 @@
 package me.mythicalflame.spigotmodding.commands;
 
-import me.mythicalflame.spigotmodding.SpigotModding;
 import me.mythicalflame.spigotmodding.items.ModdedItem;
 import me.mythicalflame.spigotmodding.utilities.SpigotModdingAPI;
 import org.bukkit.Bukkit;

@@ -131,8 +131,8 @@ public class ModRegister
         for (ModdedItem item : mod.getRegisteredItems())
         {
             Class<? extends ModdedItem> clazz = item.getClass();
-            Class[] defaultValues = {ModdedItem.class, ModdedConsumable.class, ModdedArmorPiece.class, ModdedArmorSet.class};
-            HashSet<Class> defaultSet = new HashSet<>(Arrays.asList(defaultValues));
+            Class<?>[] defaultValues = {ModdedItem.class, ModdedConsumable.class, ModdedArmorPiece.class, ModdedArmorSet.class};
+            HashSet<Class<?>> defaultSet = new HashSet<>(Arrays.asList(defaultValues));
 
             //ModTickTask
             try
@@ -205,7 +205,7 @@ public class ModRegister
             //EntityDamageByEntityEventWatcher
             try
             {
-                if (defaultSet.contains(clazz.getMethod("onAttack", EntityDamageByEntityEvent.class, EventType.class).getDeclaringClass()))
+                if (!defaultSet.contains(clazz.getMethod("onAttack", EntityDamageByEntityEvent.class, EventType.class).getDeclaringClass()))
                 {
                     if (!registered[4])
                     {

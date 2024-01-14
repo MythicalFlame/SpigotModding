@@ -15,8 +15,8 @@ import java.util.Objects;
 
 public class EntityDamageByEntityEventWatcher implements Listener
 {
-    private static ArrayList<ModdedItem> items = new ArrayList<>();
-    private static ArrayList<ModdedArmorSet> armorSets = new ArrayList<>();
+    private static final ArrayList<ModdedItem> items = new ArrayList<>();
+    private static final ArrayList<ModdedArmorSet> armorSets = new ArrayList<>();
 
     @EventHandler
     public void damageWatcher(EntityDamageByEntityEvent event)

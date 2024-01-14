@@ -2,6 +2,7 @@ package me.mythicalflame.spigotmodding.functionalities;
 
 import me.mythicalflame.spigotmodding.items.ModdedArmorSet;
 import me.mythicalflame.spigotmodding.items.ModdedConsumable;
+import me.mythicalflame.spigotmodding.items.ModdedItem;
 import me.mythicalflame.spigotmodding.utilities.SpigotModdingAPI;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -12,8 +13,8 @@ import java.util.ArrayList;
 
 public class PlayerItemConsumeEventWatcher implements Listener
 {
-    private static ArrayList<ModdedConsumable> items = new ArrayList<>();
-    private static ArrayList<ModdedArmorSet> armorSets = new ArrayList<>();
+    private static final ArrayList<ModdedItem> items = new ArrayList<>();
+    private static final ArrayList<ModdedArmorSet> armorSets = new ArrayList<>();
 
     @EventHandler
     public void playerItemConsumeEventWatcher(PlayerItemConsumeEvent event)
@@ -37,21 +38,7 @@ public class PlayerItemConsumeEventWatcher implements Listener
     {
         ItemStack consumed = event.getItem();
 
-        ModdedConsumable consumableUsed = null;
-
-        if (!consumed.hasItemMeta() || !consumed.getItemMeta().hasCustomModelData())
-        {
-            return;
-        }
-
-        for (ModdedConsumable item : items)
-        {
-            if (consumed.getItemMeta().getCustomModelData() == item.getItem().getItemMeta().getCustomModelData())
-            {
-                consumableUsed = item;
-                break;
-            }
-        }
+        ModdedConsumable consumableUsed = (ModdedConsumable) SpigotModdingAPI.getModdedItem(consumed, items);
 
         if (consumableUsed != null)
         {

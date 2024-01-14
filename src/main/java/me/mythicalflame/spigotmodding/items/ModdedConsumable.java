@@ -8,7 +8,7 @@ import java.util.List;
 
 public abstract class ModdedConsumable extends ModdedItem
 {
-    public ModdedConsumable(String namespace, String ID, Material material, String name, /*CustomRecipe[] recipes,*/ int customModelData, List<String> lore)
+    public ModdedConsumable(String namespace, String ID, Material material, String name, Integer customModelData, List<String> lore)
     {
         super(namespace, ID, material, name, customModelData, lore);
 

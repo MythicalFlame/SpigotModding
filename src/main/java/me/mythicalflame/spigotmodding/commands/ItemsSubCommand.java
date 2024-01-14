@@ -16,24 +16,24 @@ public class ItemsSubCommand
             return;
         }
 
-        String result = ChatColor.GOLD + "SpigotModding Registered Items:\n" + ChatColor.RESET;
+        StringBuilder result = new StringBuilder(ChatColor.GOLD + "SpigotModding Registered Items:\n" + ChatColor.RESET);
 
-        for (short i = 0; i < SpigotModding.getRegisteredMods().size(); i++)
+        for (int i = 0; i < SpigotModding.getRegisteredMods().size(); i++)
         {
             Mod mod = SpigotModding.getRegisteredMods().get(i);
 
-            for (short j = 0; j < mod.getRegisteredItems().size(); j++)
+            for (int j = 0; j < mod.getRegisteredItems().size(); j++)
             {
                 ModdedItem item = mod.getRegisteredItems().get(j);
-                result += item.getNamespace() + ":" + item.getID();
+                result.append(item.getNamespace()).append(":").append(item.getID());
 
-                if (i < SpigotModding.getRegisteredMods().size() - 1 || j < mod.getRegisteredItems().size())
+                if (i < SpigotModding.getRegisteredMods().size() - 1 || j < mod.getRegisteredItems().size() - 1)
                 {
-                    result += ", ";
+                    result.append(", ");
                 }
             }
         }
 
-        sender.sendMessage(result);
+        sender.sendMessage(result.toString());
     }
 }

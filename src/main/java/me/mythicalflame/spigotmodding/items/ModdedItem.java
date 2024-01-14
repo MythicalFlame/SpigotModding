@@ -1,5 +1,6 @@
 package me.mythicalflame.spigotmodding.items;
 
+import me.mythicalflame.spigotmodding.SpigotModding;
 import me.mythicalflame.spigotmodding.utilities.EventType;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -9,6 +10,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,14 +21,17 @@ public abstract class ModdedItem
     private final String ID;
     private final Material MATERIAL;
     private final ItemStack ITEM;
-    private final int CUSTOM_MODEL_DATA;
 
-    public ModdedItem(String namespace, String id, Material material, String name, int customModelData, List<String> lore)
+    public ModdedItem(String namespace, String id, Material material, String name, Integer customModelData, List<String> lore)
     {
+        if (namespace == null || id == null || material == null || material == Material.AIR)
+        {
+            throw new NullPointerException("Attempted to initialize a ModdedItem object with a null field!");
+        }
+
         NAMESPACE = namespace.toLowerCase();
         ID = id.toLowerCase();
         MATERIAL = material;
-        CUSTOM_MODEL_DATA = customModelData;
 
         ItemStack constructorItemStack = new ItemStack(material);
 
@@ -35,12 +40,20 @@ public abstract class ModdedItem
         //Name without italics
         moddedItemMeta.setDisplayName(ChatColor.RESET + name);
 
+        //Lore
         ArrayList<String> moddedItemLore = new ArrayList<>();
         moddedItemLore.add(NAMESPACE + ":" + ID);
-        moddedItemLore.addAll(lore);
+        if (lore != null)
+        {
+            moddedItemLore.addAll(lore);
+        }
         moddedItemMeta.setLore(moddedItemLore);
 
-        moddedItemMeta.setCustomModelData(CUSTOM_MODEL_DATA);
+        //CMD
+        moddedItemMeta.setCustomModelData(customModelData);
+
+        //PDC
+        moddedItemMeta.getPersistentDataContainer().set(SpigotModding.getContentKey(), PersistentDataType.STRING, NAMESPACE + ":" + ID);
 
         constructorItemStack.setItemMeta(moddedItemMeta);
 
@@ -48,31 +61,31 @@ public abstract class ModdedItem
     }
 
     //mods can override this for custom behavior
-    public ItemStack finalizeItem(ItemStack stack) { return stack; }
+    private ItemStack finalizeItem(ItemStack stack) { return stack; }
 
     //getters
-    public String getNamespace() { return NAMESPACE; }
+    public final String getNamespace() { return NAMESPACE; }
 
-    public String getID()
+    public final String getID()
     {
         return ID;
     }
 
-    public Material getMaterial()
+    public final Material getMaterial()
     {
         return MATERIAL;
     }
 
     public ItemStack getItem()
     {
-        return ITEM;
+        return ITEM.clone();
     }
 
-    /*public CustomRecipe[] getRecipes() { return RECIPES; }*/
-
-    public int getCustomModelData()
+    public ItemStack getItem(int amount)
     {
-        return CUSTOM_MODEL_DATA;
+        ItemStack get = ITEM.clone();
+        get.setAmount(amount);
+        return get;
     }
 
     //Events to override

@@ -4,6 +4,7 @@ import me.mythicalflame.spigotmodding.commands.CommandSpigotModding;
 import me.mythicalflame.spigotmodding.items.ModdedItem;
 import me.mythicalflame.spigotmodding.utilities.Mod;
 import me.mythicalflame.spigotmodding.utilities.ModRegister;
+import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -14,13 +15,15 @@ public final class SpigotModding extends JavaPlugin
 {
     private static Plugin plugin;
     private static Logger logger;
-    private static ArrayList<Mod> registeredMods = new ArrayList<>();
+    private static final ArrayList<Mod> registeredMods = new ArrayList<>();
+    private static NamespacedKey contentKey;
 
     @Override
     public void onEnable()
     {
         plugin = this;
         logger = getLogger();
+        contentKey = new NamespacedKey(this, "content");
 
         //Set up configuration
         getConfig().options().copyDefaults();
@@ -37,12 +40,17 @@ public final class SpigotModding extends JavaPlugin
         return registeredMods;
     }
 
+    public static NamespacedKey getContentKey()
+    {
+        return contentKey;
+    }
+
     //registration of mod objects
     public static boolean registerMod(Mod mod)
     {
         for (Mod i : registeredMods)
         {
-            if (i.getNamespace().equalsIgnoreCase(mod.getNamespace()))
+            if (i.getNamespace().equals(mod.getNamespace()))
             {
                 logger.warning("Could not register mod \"" + mod.getDisplayName() + "\" due to namespace \"" + mod.getNamespace() + "\" being already used!");
                 return false;

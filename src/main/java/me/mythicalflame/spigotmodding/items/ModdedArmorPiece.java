@@ -13,7 +13,7 @@ public abstract class ModdedArmorPiece extends ModdedItem
 
     private static final HashSet<Material> WEARABLES = new HashSet<>(Arrays.asList(WEARABLE_VALUES));
 
-    public ModdedArmorPiece(String namespace, String ID, Material material, String name, int customModelData, List<String> lore)
+    public ModdedArmorPiece(String namespace, String ID, Material material, String name, Integer customModelData, List<String> lore)
     {
         super(namespace, ID, material, name, customModelData, lore);
 

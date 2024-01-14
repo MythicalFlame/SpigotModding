@@ -15,18 +15,18 @@ public class ModsSubCommand
             return;
         }
 
-        String result = ChatColor.GOLD + "SpigotModding Registered Mods:\n" + ChatColor.RESET;
+        StringBuilder result = new StringBuilder(ChatColor.GOLD + "SpigotModding Registered Mods:\n" + ChatColor.RESET);
         for (short i = 0; i < SpigotModding.getRegisteredMods().size(); i++)
         {
             Mod mod = SpigotModding.getRegisteredMods().get(i);
-            result += mod.getDisplayName() + " (" + mod.getNamespace() + ")";
+            result.append(mod.getDisplayName()).append(" (").append(mod.getNamespace()).append(")");
 
             if (i < SpigotModding.getRegisteredMods().size() - 1)
             {
-                result += ", ";
+                result.append(", ");
             }
         }
 
-        sender.sendMessage(result);
+        sender.sendMessage(result.toString());
     }
 }

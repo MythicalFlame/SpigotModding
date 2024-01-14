@@ -12,8 +12,8 @@ import java.util.ArrayList;
 
 public class ModTickTask extends BukkitRunnable
 {
-    private static ArrayList<ModdedItem> items = new ArrayList<>();
-    private static ArrayList<ModdedArmorSet> armorSets = new ArrayList<>();
+    private static final ArrayList<ModdedItem> items = new ArrayList<>();
+    private static final ArrayList<ModdedArmorSet> armorSets = new ArrayList<>();
 
     @Override
     public void run()
