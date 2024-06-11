@@ -44,6 +44,7 @@ public class EntityDeathEventWatcher implements Listener
         }
     }
 
+    @SuppressWarnings("ConstantConditions")
     private void checkInventory(EntityDeathEvent event)
     {
         Player player = event.getEntity().getKiller();

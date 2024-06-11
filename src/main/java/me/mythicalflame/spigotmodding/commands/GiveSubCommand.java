@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class GiveSubCommand
 {
+    @SuppressWarnings("ConstantConditions")
     public static void giveSubCommand(CommandSender sender, String[] args)
     {
         if (!sender.hasPermission("spigotmodding.commandspigotmodding.give"))

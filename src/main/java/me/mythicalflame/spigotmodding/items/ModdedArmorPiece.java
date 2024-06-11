@@ -19,7 +19,7 @@ public abstract class ModdedArmorPiece extends ModdedItem
 
         if (!WEARABLES.contains(material))
         {
-            throw new NotWearableException("Attempted to initialize ModdedArmorPiece object with material that is not wearable! (" + material + ")");
+            throw new NotWearableException("Attempted to initialize a ModdedArmorPiece object with material that is not wearable! (" + material + ")");
         }
     }
 

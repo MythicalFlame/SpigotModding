@@ -1,3 +1,8 @@
 # SPIGOTMODDING configuration
 # This file allows you to change how the spigotmodding plugin works
-# There are no options currently, as they were all removed when the 0.7.0 update introduced the smart listener system.
+
+# If an error occurs and these setting are true, the server will be shut down
+shutDownServerOnError:
+  modVersionError: true
+  modNamespaceCollision: true
+  modDoubleNamespaces: true

@@ -14,9 +14,10 @@ public abstract class ModdedConsumable extends ModdedItem
 
         if (!material.isEdible())
         {
-            throw new NotConsumableException("Attempted to initialize ModdedConsumable object with material that is not consumable! (" + material + ")");
+            throw new NotConsumableException("Attempted to initialize a ModdedConsumable object with material that is not consumable! (" + material + ")");
         }
     }
 
+    @SuppressWarnings({"EmptyMethod", "unused"})
     public void onConsume(PlayerItemConsumeEvent event) {}
 }

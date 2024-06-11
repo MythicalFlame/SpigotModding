@@ -9,22 +9,42 @@ public final class Mod
 {
     private final String namespace;
     private final String displayName;
+    private final Version APIVersion;
     private final ArrayList<ModdedItem> registeredItems = new ArrayList<>();
     private final ArrayList<ModdedArmorSet> registeredArmor = new ArrayList<>();
 
-    public Mod(String namespace, String displayName)
+    @SuppressWarnings("unused")
+    public Mod(String namespace, String displayName, Version APIVersion)
     {
         this.namespace = namespace.toLowerCase();
         this.displayName = displayName;
+        this.APIVersion = APIVersion;
     }
 
     public String getNamespace() { return namespace; }
     public String getDisplayName() { return displayName; }
+    public Version getAPIVersion()
+    {
+        return APIVersion;
+    }
     public ArrayList<ModdedItem> getRegisteredItems() { return registeredItems; }
     public ArrayList<ModdedArmorSet> getRegisteredArmor() { return registeredArmor; }
 
+    @Override
+    public String toString()
+    {
+        return displayName + " " + APIVersion;
+    }
+
+    @SuppressWarnings("unused")
     public void registerItem(ModdedItem item)
     {
         registeredItems.add(item);
+    }
+
+    @SuppressWarnings("unused")
+    public void registerArmor(ModdedArmorSet set)
+    {
+        registeredArmor.add(set);
     }
 }

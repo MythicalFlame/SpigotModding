@@ -18,7 +18,7 @@ public abstract class ModdedArmorSet
     {
         if (choices.length != 4)
         {
-            throw new ArmorSetChoicesException("Attempted to initialize ModdedArmorSet object with an armor choice array that is length" + choices.length + "instead of length 4!");
+            throw new ArmorSetChoicesException("Attempted to initialize a ModdedArmorSet object with an armor choice array that is length" + choices.length + "instead of length 4!");
         }
 
         this.choices = choices;
@@ -29,9 +29,14 @@ public abstract class ModdedArmorSet
         return choices;
     }
 
+    @SuppressWarnings({"EmptyMethod", "unused"})
     public void onTick(Player player) {}
+    @SuppressWarnings({"EmptyMethod", "unused"})
     public void onInteract(PlayerInteractEvent event) {}
+    @SuppressWarnings({"EmptyMethod", "unused"})
     public void onKill(EntityDeathEvent event) {}
+    @SuppressWarnings({"EmptyMethod", "unused"})
     public void onAttack(EntityDamageByEntityEvent event) {}
+    @SuppressWarnings({"EmptyMethod", "unused"})
     public void onConsume(PlayerItemConsumeEvent event) {}
 }

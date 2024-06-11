@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 
 public class ItemSubCommand
 {
+    @SuppressWarnings("ConstantConditions")
     public static void itemSubCommand(CommandSender sender, String[] args)
     {
         if (!sender.hasPermission("spigotmodding.commandspigotmodding.item"))

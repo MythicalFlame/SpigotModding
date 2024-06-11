@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class SpigotModdingAPI
@@ -18,7 +19,7 @@ public class SpigotModdingAPI
     public static boolean isWearingSet(Player player, ModdedArmorSet set)
     {
         //checks (choice == null -> any accepted, choice == [] -> empty slot accepted only)
-        for (byte i = 0; i < 4; i++)
+        for (int i = 0; i < 4; i++)
         {
             ArmorChoice choice = set.getChoices()[i];
 
@@ -48,18 +49,9 @@ public class SpigotModdingAPI
                     }
                     else
                     {
-                        boolean pieceFound = false;
+                        ModdedItem pieceFound = SpigotModdingAPI.getModdedItem(playerArmor, Arrays.asList(choice.armors()));
 
-                        for (ModdedArmorPiece piece : choice.getArmors())
-                        {
-                            if (piece.getItem().getItemMeta().getCustomModelData() == playerArmor.getItemMeta().getCustomModelData())
-                            {
-                                pieceFound = true;
-                                break;
-                            }
-                        }
-
-                        if (!pieceFound)
+                        if (pieceFound == null)
                         {
                             return false;
                         }
@@ -94,6 +86,7 @@ public class SpigotModdingAPI
     }
 
     //search with itemstack within the set of all items
+    @SuppressWarnings({"ConstantConditions", "unused"})
     public static ModdedItem getModdedItem(ItemStack stack)
     {
         if (stack == null || stack.getType() == Material.AIR || !stack.getItemMeta().getPersistentDataContainer().has(SpigotModding.getContentKey(), PersistentDataType.STRING))
@@ -118,6 +111,7 @@ public class SpigotModdingAPI
     }
 
     //search with itemstack within a set of items
+    @SuppressWarnings("ConstantConditions")
     public static ModdedItem getModdedItem(ItemStack stack, List<ModdedItem> list)
     {
         if (stack == null || stack.getType() == Material.AIR || !stack.getItemMeta().getPersistentDataContainer().has(SpigotModding.getContentKey(), PersistentDataType.STRING))

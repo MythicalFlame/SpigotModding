@@ -22,6 +22,7 @@ public abstract class ModdedItem
     private final Material MATERIAL;
     private final ItemStack ITEM;
 
+    @SuppressWarnings("ConstantConditions")
     public ModdedItem(String namespace, String id, Material material, String name, Integer customModelData, List<String> lore)
     {
         if (namespace == null || id == null || material == null || material == Material.AIR)
@@ -81,6 +82,7 @@ public abstract class ModdedItem
         return ITEM.clone();
     }
 
+    @SuppressWarnings("unused")
     public ItemStack getItem(int amount)
     {
         ItemStack get = ITEM.clone();
@@ -89,8 +91,12 @@ public abstract class ModdedItem
     }
 
     //Events to override
+    @SuppressWarnings({"EmptyMethod", "unused"})
     public void onTick(Player player) {}
+    @SuppressWarnings({"EmptyMethod", "unused"})
     public void onInteract(PlayerInteractEvent event, EventType type) {}
+    @SuppressWarnings({"EmptyMethod", "unused"})
     public void onKill(EntityDeathEvent event, EventType type) {}
+    @SuppressWarnings({"EmptyMethod", "unused"})
     public void onAttack(EntityDamageByEntityEvent event, EventType type) {}
 }
