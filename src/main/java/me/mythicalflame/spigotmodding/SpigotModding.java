@@ -37,6 +37,12 @@ public final class SpigotModding extends JavaPlugin
         this.getCommand("spigotmodding").setExecutor(new CommandSpigotModding());
 
         logger.info("Finished starting up!");
+        logger.warning("CRITICAL WARNING! You are using the universal (legacy) version of SpigotModding!");
+        logger.warning("This version is intended for use with ancient Minecraft versions (1.14-1.17)");
+        logger.warning("If you use 1.18 or above, please download the latest release version that supports your MC version.");
+        logger.warning("This version will not receive updates, bar a few CRITICAL bug fix updates. There will be no new features.");
+        logger.warning("This version is compatible with all mods made for it and 0.7.0-release");
+        logger.warning("USE AT YOUR OWN RISK!");
     }
 
     public static ArrayList<Mod> getRegisteredMods()
@@ -68,6 +74,9 @@ public final class SpigotModding extends JavaPlugin
             {
                 logger.severe("Critical error found while registering mod " + mod + "!");
                 logger.severe("Could not register mod " + mod + " due to requiring an incompatible version! (" + mod.getAPIVersion() + ")");
+                logger.severe("You are on the universal (legacy) version of SpigotModding intended for 1.14-1.17");
+                logger.severe("If you are on 1.18 or higher, please use the release version");
+                logger.severe("Otherwise, you may only use mods built for this version or 0.7.0-release");
                 logger.severe("The server is now shutting down as a precautionary measure in case this mod was integral to your server experience.");
                 logger.severe("To disable the server shutting down, set shutDownServerOnError.modVersionError to false in the SpigotModding configuration.");
                 plugin.getServer().shutdown();
@@ -75,6 +84,9 @@ public final class SpigotModding extends JavaPlugin
             else
             {
                 logger.warning("Could not register mod " + mod + " due to requiring an incompatible version! (" + mod.getAPIVersion() + ")");
+                logger.warning("You are on the universal (legacy) version of SpigotModding intended for 1.14-1.17");
+                logger.warning("If you are on 1.18 or higher, please use the release version");
+                logger.warning("Otherwise, you may only use mods built for this version or 0.7.0-release");
             }
             return false;
         }

@@ -25,14 +25,25 @@ public class SpigotModdingAPI
 
             if (choice != null)
             {
-                ItemStack playerArmor = switch (i)
+                ItemStack playerArmor;
+                switch (i)
                 {
-                    case 0 -> player.getInventory().getHelmet();
-                    case 1 -> player.getInventory().getChestplate();
-                    case 2 -> player.getInventory().getLeggings();
-                    case 3 -> player.getInventory().getBoots();
-                    default -> null;
-                };
+                    case 0:
+                        playerArmor = player.getInventory().getHelmet();
+                        break;
+                    case 1:
+                        playerArmor = player.getInventory().getChestplate();
+                        break;
+                    case 2:
+                        playerArmor = player.getInventory().getLeggings();
+                        break;
+                    case 3:
+                        playerArmor = player.getInventory().getBoots();
+                        break;
+                    default:
+                        playerArmor = null;
+                        break;
+                }
 
                 if (choice.equals(emptyArmorChoice))
                 {
@@ -49,7 +60,7 @@ public class SpigotModdingAPI
                     }
                     else
                     {
-                        ModdedItem pieceFound = SpigotModdingAPI.getModdedItem(playerArmor, Arrays.asList(choice.armors()));
+                        ModdedItem pieceFound = SpigotModdingAPI.getModdedItem(playerArmor, Arrays.asList(choice.getArmors()));
 
                         if (pieceFound == null)
                         {

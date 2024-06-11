@@ -18,12 +18,24 @@ public class CommandSpigotModding implements CommandExecutor
 
         switch (args[0].toLowerCase())
         {
-            case "items" -> ItemsSubCommand.itemsSubCommand(sender);
-            case "item" -> ItemSubCommand.itemSubCommand(sender, args);
-            case "give" -> GiveSubCommand.giveSubCommand(sender, args);
-            case "mod" -> ModSubCommand.modSubCommand(sender, args);
-            case "mods" -> ModsSubCommand.modsSubCommand(sender);
-            default -> helpMessage(sender);
+            case "items":
+                ItemsSubCommand.itemsSubCommand(sender);
+                break;
+            case "item":
+                ItemSubCommand.itemSubCommand(sender, args);
+                break;
+            case "give":
+                GiveSubCommand.giveSubCommand(sender, args);
+                break;
+            case "mod":
+                ModSubCommand.modSubCommand(sender, args);
+                break;
+            case "mods":
+                ModsSubCommand.modsSubCommand(sender);
+                break;
+            default:
+                helpMessage(sender);
+                break;
         }
 
         return true;

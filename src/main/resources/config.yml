@@ -1,6 +1,11 @@
 # SPIGOTMODDING configuration
 # This file allows you to change how the spigotmodding plugin works
 
+# Warning! This is the universal version of SpigotModding, intended for use with 1.14 to 1.17, although it may be used with any version
+# If you are on 1.18 or higher you should attempt to use the latest plugin version that supports your MC version
+# This version does not receive any updates, and if it does, it will be for extremely important bugs! There will be no new features!
+# This version is based off of and compatible with 0.7.0-release mods. Other mods will not work!
+
 # If an error occurs and these setting are true, the server will be shut down
 shutDownServerOnError:
   modVersionError: true

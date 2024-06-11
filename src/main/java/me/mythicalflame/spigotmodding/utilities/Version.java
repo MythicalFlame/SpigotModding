@@ -62,10 +62,12 @@ public class Version
             return false;
         }
 
-        if (!(other instanceof Version otherVersion))
+        if (!(other instanceof Version))
         {
             return false;
         }
+
+        Version otherVersion = (Version) other;
 
         return major == otherVersion.major && minor == otherVersion.minor && patch == otherVersion.patch && releaseData.equals(otherVersion.releaseData);
     }
