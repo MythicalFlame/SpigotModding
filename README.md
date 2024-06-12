@@ -1,7 +1,18 @@
 # SpigotModding Library
 Very experimental and new, lacking many features.
+
 ## Usage
 Add the release jar as a plugin on your server, and as a dependency for your new plugin.
+
+## Downloads
+| Minecraft Version | Download Link                                                                | Supported? |
+| ----------------- | ---------------------------------------------------------------------------- | ---------- |
+| 1.18-1.20.6       | [v0.7.0](https://github.com/MythicalFlame/SpigotModding/releases/tag/v0.7.0) | ✅         |
+| 1.14.4-1.17.1     | [u1.0.0](https://github.com/MythicalFlame/SpigotModding/releases/tag/u1.0.0) | ❌         |
+
+## Developer Guide
+I'm working on replacing this with a wiki.
+
 ### Custom Items
 Currently, items can either be a regular item, a consumable, or a custom armor piece (custom armor covered in the next section).
 
@@ -10,7 +21,7 @@ For a regular item, extend the `ModdedItem` class and create a default construct
 ```java
 public ModdedItemTinSword()
 {
-  super("ultraswords", "tin_sword", Material.IRON_SWORD, "Tin Sword")
+  super("ultraswords", "tin_sword", Material.IRON_SWORD, "Tin Sword");
 }
 ```
 Optionally, you can put an integer argument after the display name argument to add that number as custom model data for the item.
@@ -37,27 +48,35 @@ public void onAttack(EntityDamageByEntityEvent event)
   event.setDamage(...);
 }
 ```
-### Custom Armor
-Custom armor is a bit more complex to set up. To begin, create your armor piece item classes. These should inherit from `ModdedArmorPiece`. Next, create a new class inheriting from `ArmorSetEffect`. The constructor should take potion effects. The plugin checks every 10 seconds if a player has an armor set on to give effects, so you should make the duration of all of your potion effects at least 10. Finally, create a subclass of `ModdedArmorSet` and pass in a `ModdedArmorPiece` array beginning with the helmet object and ending with your boots object, and an `ArmorSetEffect` object.
 
+### Custom Armor
+Custom armor is a bit more complex to set up. To begin, create your armor piece item classes. These should inherit from `ModdedArmorPiece`. Next, for each armor piece, create an `ArmorChoice` object. The constructor takes in an array of `ModdedArmorPiece` objects. An empty array means that no armor pieces are accepted for that slot while a null array means that all wearables are accepted. Finally, create a subclass of `ModdedArmorSet` and pass in an `ArmorChoice` array beginning with the helmet object and ending with your boots object. If you wish, you can override the `public void onTick(Player player)` method to do things like give resistance to wearers of the set.  
 #### NOTE: if your armor set does not require some slots, put those slots as null in your `ModdedArmorPiece` array.
+
 ### Registering your mod
-To register your custom items and armor sets, the `registerMods()` method can be used. This method takes a `ModdedItem` array (can be null to not register any) and a `ModdedArmorSet` array (can be null to not register any).
+To register your custom items and armor sets, the `SpigotModding#registerMod` method can be used. This method takes a `Mod` object. Its constructor takes in a namespace, display name, and an API version. The Version class has two constructors: `int major, int minor, int patch, String releaseData` or `int major, int minor, int patch`, which uses "release" as the releaseData.  
 Registration example (with the steel armor set from above):
 ```java
 import me.mythicalflame.spigotmodding.SpigotModding;
+import me.mythicalflame.spigotmodding.utilities.Mod;
+import me.mythicalflame.spigotmodding.utilities.Version;
 import me.mythicalflame.spigotmodding.items.ModdedItem;
 import me.mythicalflame.spigotmodding.items.ModdedArmorSet;
 
 ...
 
-ModdedItem[] items = {new ModdedItemSteelHelmet(), new ModdedItemSteelChestplate(), new ModdedItemSteelLeggings(), new ModdedItemSteelBoots()};
-ModdedArmorSet[] sets = {new ModdedArmorSetSteelSet()};
-SpigotModding.registerMods(items, sets);
+Mod mod = new Mod("morearmors", "More Armors!", new Version(0, 7, 0));
+mod.registerItem(new ModdedItemSteelHelmet());
+mod.registerItem(new ModdedItemSteelChestplate());
+mod.registerItem(new ModdedItemSteelLeggings());
+mod.registerItem(new ModdedItemSteelBoots());
+mod.registerArmor(new ModdedArmorSetSteelSet());
+SpigotModding.registerMod(mod);
 ```
+
 ### Features yet to be implemented
 #### Tools with custom durability and potentially a weapons class (extending ModdedItem)
 #### Custom Entities
-Not supported yet, next priority.
+Not supported yet, medium priority.
 #### Custom Blocks
 Will take a lot of work, for now you can create a customItem for minimal functionality, but it will become a regular block when you place it.
