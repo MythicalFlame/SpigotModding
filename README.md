@@ -2,7 +2,8 @@
 Very experimental and new, lacking many features.
 
 ## Usage
-Add the release jar as a plugin on your server, and as a dependency for your new plugin.
+Add the release jar as a plugin on your server, and as a dependency for your new plugin.  
+**NEW:** [Javadoc for the latest version](https://mythicalflame.github.io)
 
 ## Developer Guide
 I'm working on replacing this with a wiki.
