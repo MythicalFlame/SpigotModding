@@ -1,8 +1,10 @@
 package me.mythicalflame.spigotmodding.exceptions;
 
+/**
+ * This exception is thrown when a ModdedArmorSet is attempted to be initialized with an ArmorChoice array that does not have a length of 4.
+ */
 public class ArmorSetChoicesException extends RuntimeException
 {
-    @SuppressWarnings("unused")
     public ArmorSetChoicesException(String msg)
     {
         super(msg);

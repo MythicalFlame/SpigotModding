@@ -33,7 +33,7 @@ public class ModSubCommand
 
         StringBuilder result = new StringBuilder(ChatColor.GOLD + "SpigotModding Mod Inspection Results:\n" + ChatColor.RESET + "Name: " + mod.getDisplayName() + "\nNamespace: " + mod.getNamespace() + "\nRegistered Items: ");
 
-        if (mod.getRegisteredItems().size() == 0)
+        if (mod.getRegisteredItems().isEmpty())
         {
             result.append("None");
         }
@@ -54,7 +54,7 @@ public class ModSubCommand
 
         result.append("\nRegistered Armor Sets: ");
 
-        if (mod.getRegisteredArmor().size() == 0)
+        if (mod.getRegisteredArmor().isEmpty())
         {
             result.append("None");
         }

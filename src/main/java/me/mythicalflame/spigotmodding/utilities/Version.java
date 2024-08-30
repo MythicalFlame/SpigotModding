@@ -1,13 +1,36 @@
 package me.mythicalflame.spigotmodding.utilities;
 
+import java.util.Arrays;
+
+/**
+ * This class represents a SpigotModding API version.
+ */
 public class Version
 {
+    /**
+     * The major version number.
+     */
     private final int major;
+    /**
+     * The minor version number.
+     */
     private final int minor;
+    /**
+     * The patch version number.
+     */
     private final int patch;
+    /**
+     * The release metadata.
+     */
     private final String releaseData;
 
-    @SuppressWarnings("unused")
+    /**
+     * Constructs a Version object with the release metadata "release".
+     *
+     * @param major The major version number.
+     * @param minor The minor version number.
+     * @param patch The patch version number.
+     */
     public Version(int major, int minor, int patch)
     {
         this.major = major;
@@ -16,6 +39,12 @@ public class Version
         this.releaseData = "release";
     }
 
+    /**
+     * @param major The major version number.
+     * @param minor The minor version number.
+     * @param patch The patch version number.
+     * @param releaseData The release metadata.
+     */
     public Version(int major, int minor, int patch, String releaseData)
     {
         this.major = major;
@@ -24,25 +53,33 @@ public class Version
         this.releaseData = releaseData;
     }
 
-    @SuppressWarnings("unused")
+    /**
+     * @return The major version number.
+     */
     public int getMajor()
     {
         return major;
     }
 
-    @SuppressWarnings("unused")
+    /**
+     * @return The minor version number.
+     */
     public int getMinor()
     {
         return minor;
     }
 
-    @SuppressWarnings("unused")
+    /**
+     * @return The patch version number.
+     */
     public int getPatch()
     {
         return patch;
     }
 
-    @SuppressWarnings("unused")
+    /**
+     * @return The release metadata.
+     */
     public String getReleaseData()
     {
         return releaseData;
@@ -57,16 +94,17 @@ public class Version
     @Override
     public boolean equals(Object other)
     {
-        if (other == null)
-        {
-            return false;
-        }
-
         if (!(other instanceof Version otherVersion))
         {
             return false;
         }
 
         return major == otherVersion.major && minor == otherVersion.minor && patch == otherVersion.patch && releaseData.equals(otherVersion.releaseData);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Arrays.hashCode(new Object[]{major, minor, patch, releaseData});
     }
 }

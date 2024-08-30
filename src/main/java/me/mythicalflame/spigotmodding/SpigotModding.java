@@ -6,22 +6,20 @@ import me.mythicalflame.spigotmodding.utilities.Mod;
 import me.mythicalflame.spigotmodding.utilities.ModRegister;
 import me.mythicalflame.spigotmodding.utilities.Version;
 import org.bukkit.NamespacedKey;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 public final class SpigotModding extends JavaPlugin
 {
-    private static final Version[] compatibleVersions = {new Version(0, 7, 0, "release"),
-                                                         new Version(1, 0, 0, "universal")};
-    private static Plugin plugin;
+    private static final Version[] compatibleVersions = {new Version(0, 7, 1, "release")};
+    private static SpigotModding plugin;
     private static Logger logger;
     private static final ArrayList<Mod> registeredMods = new ArrayList<>();
     private static NamespacedKey contentKey;
 
-    @SuppressWarnings("ConstantConditions")
     @Override
     public void onEnable()
     {
@@ -34,23 +32,31 @@ public final class SpigotModding extends JavaPlugin
         saveDefaultConfig();
 
         //Enable commands
-        this.getCommand("spigotmodding").setExecutor(new CommandSpigotModding());
+        Objects.requireNonNull(this.getCommand("spigotmodding")).setExecutor(new CommandSpigotModding());
 
         logger.info("Finished starting up!");
     }
 
+    /**
+     * @return An ArrayList of all registered Mods.
+     */
     public static ArrayList<Mod> getRegisteredMods()
     {
         return registeredMods;
     }
 
+    /**
+     * @return The NamespacedKey that this plugin uses to mark whether an item is custom.
+     */
     public static NamespacedKey getContentKey()
     {
         return contentKey;
     }
 
-    //registration of mod objects
-    @SuppressWarnings("unused")
+    /**
+     * @param mod The mod that should be registered. The mod MUST: <ol><li>Be built against a compatible API version.</li><li>Use a unique namespace.</li><li>Have all of its items registered under one namespace.</li></ol>
+     * @return Whether the mod registration was successful or not.
+     */
     public static boolean registerMod(Mod mod)
     {
         boolean isCompatible = false;
@@ -128,7 +134,9 @@ public final class SpigotModding extends JavaPlugin
         return true;
     }
 
-    @SuppressWarnings("unused")
+    /**
+     * @return The API versions that this plugin build is compatible with.
+     */
     public static Version[] getCompatibleVersions()
     {
         return compatibleVersions;

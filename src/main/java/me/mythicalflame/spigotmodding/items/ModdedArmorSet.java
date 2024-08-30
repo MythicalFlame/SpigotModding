@@ -8,12 +8,22 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 
+/**
+ * This class represents a custom armor set.
+ */
 public abstract class ModdedArmorSet
 {
-    //TODO: allow armor pieces to have modified protection amounts
-    //pieces should hold 4 ArmorChoice objects. Index 0 indicates the helmet, index 1 the chestplate, index 2 the leggings, and index 3 the boots.
+    //TODO allow armor pieces to have modified protection amounts (armor rewrite)
+    /**
+     * The ArmorChoices that apply to this set.
+     */
     private final ArmorChoice[] choices;
 
+    /**
+     * Creates a ModdedArmorSet.
+     *
+     * @param choices The ArmorChoices that apply to this set.
+     */
     public ModdedArmorSet(ArmorChoice[] choices)
     {
         if (choices.length != 4)
@@ -24,19 +34,46 @@ public abstract class ModdedArmorSet
         this.choices = choices;
     }
 
+    /**
+     * @return This ModdedArmorSet's ArmorChoices.
+     */
     public ArmorChoice[] getChoices()
     {
         return choices;
     }
 
-    @SuppressWarnings({"EmptyMethod", "unused"})
+    /**
+     * This method is intended to be overridden and is called every tick.
+     *
+     * @param player The player wearing the armor set.
+     */
     public void onTick(Player player) {}
-    @SuppressWarnings({"EmptyMethod", "unused"})
+
+    /**
+     * This method is intended to be overriden and is called when a set wearer is associated with a PlayerInteractEvent.
+     *
+     * @param event The PlayerInteractEvent.
+     */
     public void onInteract(PlayerInteractEvent event) {}
-    @SuppressWarnings({"EmptyMethod", "unused"})
+
+    /**
+     * This method is intended to be overriden and is called when a set wearer is the killer in an EntityDeathEvent.
+     *
+     * @param event The EntityDeathEvent.
+     */
     public void onKill(EntityDeathEvent event) {}
-    @SuppressWarnings({"EmptyMethod", "unused"})
+
+    /**
+     * This method is intended to be overriden and is called when a set wearer is the attacker in an EntityDamageByEntityEvent.
+     *
+     * @param event The EntityDamageByEntityEvent
+     */
     public void onAttack(EntityDamageByEntityEvent event) {}
-    @SuppressWarnings({"EmptyMethod", "unused"})
+
+    /**
+     * This method is intended to be overriden and is called when a set wearer consumes an item.
+     *
+     * @param event The PlayerItemConsumeEvent.
+     */
     public void onConsume(PlayerItemConsumeEvent event) {}
 }

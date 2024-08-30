@@ -4,12 +4,6 @@ Very experimental and new, lacking many features.
 ## Usage
 Add the release jar as a plugin on your server, and as a dependency for your new plugin.
 
-## Downloads
-| Minecraft Version | Download Link                                                                | Supported? |
-| ----------------- | ---------------------------------------------------------------------------- | ---------- |
-| 1.18-1.20.6       | [v0.7.0](https://github.com/MythicalFlame/SpigotModding/releases/tag/v0.7.0) | ✅         |
-| 1.14.4-1.17.1     | [u1.0.0](https://github.com/MythicalFlame/SpigotModding/releases/tag/u1.0.0) | ❌         |
-
 ## Developer Guide
 I'm working on replacing this with a wiki.
 

@@ -2,6 +2,7 @@ package me.mythicalflame.spigotmodding.functionalities;
 
 import me.mythicalflame.spigotmodding.items.ModdedArmorSet;
 import me.mythicalflame.spigotmodding.items.ModdedItem;
+import me.mythicalflame.spigotmodding.utilities.EventType;
 import me.mythicalflame.spigotmodding.utilities.SpigotModdingAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -9,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ModTickTask extends BukkitRunnable
 {
@@ -26,7 +28,22 @@ public class ModTickTask extends BukkitRunnable
 
                 if (item != null)
                 {
-                    item.onTick(player);
+                    EventType type;
+
+                    if (Objects.equals(stack, player.getInventory().getItemInMainHand()))
+                    {
+                        type = EventType.IN_MAIN_HAND;
+                    }
+                    else if (Objects.equals(stack, player.getInventory().getItemInOffHand()))
+                    {
+                        type = EventType.IN_OFF_HAND;
+                    }
+                    else
+                    {
+                        type = EventType.IN_INVENTORY;
+                    }
+
+                    item.onTick(player, type);
                 }
             }
 

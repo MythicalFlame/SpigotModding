@@ -10,7 +10,6 @@ import org.bukkit.inventory.ItemStack;
 
 public class GiveSubCommand
 {
-    @SuppressWarnings("ConstantConditions")
     public static void giveSubCommand(CommandSender sender, String[] args)
     {
         if (!sender.hasPermission("spigotmodding.commandspigotmodding.give"))
@@ -65,7 +64,7 @@ public class GiveSubCommand
 
         receiver.getInventory().addItem(giveItem);
 
-        sender.sendMessage("Gave " + itemAmount + " [" + itemFound.getItem().getItemMeta().getDisplayName() + "] to " + args[1]);
+        sender.sendMessage("Gave " + itemAmount + " [" + itemFound.getDisplayName() + "] to " + args[1]);
 
     }
 }

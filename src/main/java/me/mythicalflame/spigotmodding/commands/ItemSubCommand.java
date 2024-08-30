@@ -5,9 +5,10 @@ import me.mythicalflame.spigotmodding.utilities.SpigotModdingAPI;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
+import java.util.Objects;
+
 public class ItemSubCommand
 {
-    @SuppressWarnings("ConstantConditions")
     public static void itemSubCommand(CommandSender sender, String[] args)
     {
         if (!sender.hasPermission("spigotmodding.commandspigotmodding.item"))
@@ -40,7 +41,8 @@ public class ItemSubCommand
         }
         else
         {
-            sender.sendMessage(ChatColor.GOLD + "SpigotModding Item Inspection Results:\n" + ChatColor.RESET + "Mod : " + SpigotModdingAPI.getMod(itemFound.getNamespace()).getDisplayName() + "\nName: " + itemFound.getItem().getItemMeta().getDisplayName() + "\nNamespace: " + itemFound.getNamespace() + "\nID: " + itemFound.getID() + "\nMaterial: " + itemFound.getMaterial() + "\nCustom Model Data: " + itemFound.getItem().getItemMeta().getCustomModelData());
+            int customModelData = itemFound.hasCustomModelData() ? itemFound.getCustomModelData() : -1;
+            sender.sendMessage(ChatColor.GOLD + "SpigotModding Item Inspection Results:\n" + ChatColor.RESET + "Mod : " + Objects.requireNonNull(SpigotModdingAPI.getMod(itemFound)).getDisplayName() + "\nName: " + itemFound.getDisplayName() + "\nNamespace: " + itemFound.getNamespace() + "\nID: " + itemFound.getID() + "\nMaterial: " + itemFound.getMaterial() + "\nCustom Model Data: " + (customModelData == -1 ? "None" : customModelData));
         }
     }
 }

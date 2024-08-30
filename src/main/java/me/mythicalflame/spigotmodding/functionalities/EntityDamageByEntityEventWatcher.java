@@ -47,11 +47,19 @@ public class EntityDamageByEntityEventWatcher implements Listener
         {
             ModdedItem item = SpigotModdingAPI.getModdedItem(stack, items);
 
-            EventType type = EventType.IN_INVENTORY;
+            EventType type;
 
             if (Objects.equals(stack, player.getInventory().getItemInMainHand()))
             {
                 type = EventType.IN_MAIN_HAND;
+            }
+            else if (Objects.equals(stack, player.getInventory().getItemInOffHand()))
+            {
+                type = EventType.IN_OFF_HAND;
+            }
+            else
+            {
+                type = EventType.IN_INVENTORY;
             }
 
             if (item != null)

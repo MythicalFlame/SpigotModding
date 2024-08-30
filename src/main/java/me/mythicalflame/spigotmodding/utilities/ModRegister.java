@@ -1,5 +1,6 @@
 package me.mythicalflame.spigotmodding.utilities;
 
+import me.mythicalflame.spigotmodding.SpigotModding;
 import me.mythicalflame.spigotmodding.functionalities.EntityDamageByEntityEventWatcher;
 import me.mythicalflame.spigotmodding.functionalities.EntityDeathEventWatcher;
 import me.mythicalflame.spigotmodding.functionalities.ModTickTask;
@@ -14,7 +15,6 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
-import org.bukkit.plugin.Plugin;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -31,13 +31,13 @@ public class ModRegister
      */
     private static final boolean[] registered = new boolean[5];
 
-    public static void register(Mod mod, Plugin plugin)
+    public static void register(Mod mod, SpigotModding plugin)
     {
         registerArmor(mod, plugin);
         registerItems(mod, plugin);
     }
 
-    private static void registerArmor(Mod mod, Plugin plugin)
+    private static void registerArmor(Mod mod, SpigotModding plugin)
     {
         for (ModdedArmorSet set : mod.getRegisteredArmor())
         {
@@ -126,7 +126,7 @@ public class ModRegister
         }
     }
 
-    private static void registerItems(Mod mod, Plugin plugin)
+    private static void registerItems(Mod mod, SpigotModding plugin)
     {
         for (ModdedItem item : mod.getRegisteredItems())
         {
