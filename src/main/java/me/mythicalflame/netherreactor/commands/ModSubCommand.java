@@ -1,9 +1,9 @@
-package me.mythicalflame.spigotmodding.commands;
+package me.mythicalflame.netherreactor.commands;
 
-import me.mythicalflame.spigotmodding.items.ModdedArmorSet;
-import me.mythicalflame.spigotmodding.items.ModdedItem;
-import me.mythicalflame.spigotmodding.utilities.Mod;
-import me.mythicalflame.spigotmodding.utilities.SpigotModdingAPI;
+import me.mythicalflame.netherreactor.items.ModdedArmorSet;
+import me.mythicalflame.netherreactor.items.ModdedItem;
+import me.mythicalflame.netherreactor.utilities.Mod;
+import me.mythicalflame.netherreactor.utilities.NetherReactorAPI;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
@@ -11,19 +11,19 @@ public class ModSubCommand
 {
     public static void modSubCommand(CommandSender sender, String[] args)
     {
-        if (!sender.hasPermission("spigotmodding.commandspigotmodding.mod"))
+        if (!sender.hasPermission("netherreactor.commandnetherreactor.mod"))
         {
-            sender.sendMessage(ChatColor.RED + "You do not have permission to use the spigotmodding mod command!");
+            sender.sendMessage(ChatColor.RED + "You do not have permission to use the netherreactor mod command!");
             return;
         }
 
         if (args.length < 2)
         {
-            sender.sendMessage(ChatColor.RED + "/spigotmodding mod <modNamespace>");
+            sender.sendMessage(ChatColor.RED + "/netherreactor mod <modNamespace>");
             return;
         }
 
-        Mod mod = SpigotModdingAPI.getMod(args[1]);
+        Mod mod = NetherReactorAPI.getMod(args[1]);
 
         if (mod == null)
         {
@@ -31,7 +31,7 @@ public class ModSubCommand
             return;
         }
 
-        StringBuilder result = new StringBuilder(ChatColor.GOLD + "SpigotModding Mod Inspection Results:\n" + ChatColor.RESET + "Name: " + mod.getDisplayName() + "\nNamespace: " + mod.getNamespace() + "\nRegistered Items: ");
+        StringBuilder result = new StringBuilder(ChatColor.GOLD + "NetherReactor Mod Inspection Results:\n" + ChatColor.RESET + "Name: " + mod.getDisplayName() + "\nNamespace: " + mod.getNamespace() + "\nRegistered Items: ");
 
         if (mod.getRegisteredItems().isEmpty())
         {

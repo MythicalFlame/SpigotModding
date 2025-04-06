@@ -1,9 +1,9 @@
-package me.mythicalflame.spigotmodding.utilities;
+package me.mythicalflame.netherreactor.utilities;
 
 import java.util.Arrays;
 
 /**
- * This class represents a SpigotModding API version.
+ * This class represents a NetherReactor API version.
  */
 public class Version
 {

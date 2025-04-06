@@ -1,7 +1,7 @@
-package me.mythicalflame.spigotmodding.items;
+package me.mythicalflame.netherreactor.items;
 
-import me.mythicalflame.spigotmodding.SpigotModding;
-import me.mythicalflame.spigotmodding.utilities.EventType;
+import me.mythicalflame.netherreactor.NetherReactorModLoader;
+import me.mythicalflame.netherreactor.utilities.EventType;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -90,7 +90,7 @@ public abstract class ModdedItem
         moddedItemMeta.setCustomModelData(customModelData);
 
         //PDC
-        moddedItemMeta.getPersistentDataContainer().set(SpigotModding.getContentKey(), PersistentDataType.STRING, NAMESPACE + ":" + ID);
+        moddedItemMeta.getPersistentDataContainer().set(NetherReactorModLoader.getContentKey(), PersistentDataType.STRING, NAMESPACE + ":" + ID);
 
         constructorItemStack.setItemMeta(moddedItemMeta);
 
@@ -114,11 +114,15 @@ public abstract class ModdedItem
     protected ItemStack finalizeItem(ItemStack stack) { return stack; }
 
     /**
+     * Gets the namespace of the item.
+     *
      * @return The non-null namespace that this item belongs to.
      */
     public final String getNamespace() { return NAMESPACE; }
 
     /**
+     * Gets the ID of the item.
+     *
      * @return The non-null ID of this item.
      */
     public final String getID()
@@ -127,6 +131,8 @@ public abstract class ModdedItem
     }
 
     /**
+     * Gets the material of the item.
+     *
      * @return The non-null Material that this item is based off of.
      */
     public final Material getMaterial()
@@ -135,6 +141,8 @@ public abstract class ModdedItem
     }
 
     /**
+     * Gets the display name of the item.
+     *
      * @return The nullable display name of this item.
      */
     public final String getDisplayName()
@@ -143,6 +151,8 @@ public abstract class ModdedItem
     }
 
     /**
+     * Gets the custom model data of the item.
+     *
      * @return The nullable custom model data value of this item.
      */
     public final Integer getCustomModelData()
@@ -151,6 +161,8 @@ public abstract class ModdedItem
     }
 
     /**
+     * Finds out whether the item has custom model data or not.
+     *
      * @return Whether the item has custom model data or not.
      */
     public final boolean hasCustomModelData()
@@ -159,6 +171,8 @@ public abstract class ModdedItem
     }
 
     /**
+     * Gets the ItemStack representation of the item with an amount of 1.
+     *
      * @return A clone of the ItemStack representation of this item with an amount of 1.
      */
     public ItemStack getItem()
@@ -167,6 +181,8 @@ public abstract class ModdedItem
     }
 
     /**
+     * Gets the ItemStack representation of the item with a specific amount.
+     *
      * @param amount The amount of items that should be in the ItemStack.
      * @return A clone of the ItemStack representation of this item with a variable amount.
      */
@@ -209,6 +225,12 @@ public abstract class ModdedItem
      */
     public void onAttack(EntityDamageByEntityEvent event, EventType type) {}
 
+    /**
+     * This method checks if two objects are equal.
+     *
+     * @param other The object to compare to.
+     * @return Whether the two objects are equal.
+     */
     @Override
     public boolean equals(Object other)
     {
@@ -220,7 +242,12 @@ public abstract class ModdedItem
         return NAMESPACE.equals(otherItem.NAMESPACE) && ID.equals(otherItem.ID);
     }
 
-    //Source: https://stackoverflow.com/a/16377941
+    /**
+     * Overrides Object#hashCode.
+     * <p><a href="https://stackoverflow.com/a/16377941">Credit</a></p>
+     *
+     * @return The hashcode for this object.
+     */
     @Override
     public int hashCode()
     {

@@ -1,4 +1,4 @@
-package me.mythicalflame.spigotmodding.utilities;
+package me.mythicalflame.netherreactor.utilities;
 
 /**
  * Represents where a custom item in a player's inventory is.

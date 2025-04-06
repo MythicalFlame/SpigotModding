@@ -1,6 +1,6 @@
-package me.mythicalflame.spigotmodding.items;
+package me.mythicalflame.netherreactor.items;
 
-import me.mythicalflame.spigotmodding.exceptions.NotConsumableException;
+import me.mythicalflame.netherreactor.exceptions.NotConsumableException;
 import org.bukkit.Material;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 

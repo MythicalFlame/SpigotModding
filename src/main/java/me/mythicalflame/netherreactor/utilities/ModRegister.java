@@ -1,15 +1,15 @@
-package me.mythicalflame.spigotmodding.utilities;
+package me.mythicalflame.netherreactor.utilities;
 
-import me.mythicalflame.spigotmodding.SpigotModding;
-import me.mythicalflame.spigotmodding.functionalities.EntityDamageByEntityEventWatcher;
-import me.mythicalflame.spigotmodding.functionalities.EntityDeathEventWatcher;
-import me.mythicalflame.spigotmodding.functionalities.ModTickTask;
-import me.mythicalflame.spigotmodding.functionalities.PlayerInteractEventWatcher;
-import me.mythicalflame.spigotmodding.functionalities.PlayerItemConsumeEventWatcher;
-import me.mythicalflame.spigotmodding.items.ModdedArmorPiece;
-import me.mythicalflame.spigotmodding.items.ModdedArmorSet;
-import me.mythicalflame.spigotmodding.items.ModdedConsumable;
-import me.mythicalflame.spigotmodding.items.ModdedItem;
+import me.mythicalflame.netherreactor.NetherReactorModLoader;
+import me.mythicalflame.netherreactor.functionalities.EntityDamageByEntityEventWatcher;
+import me.mythicalflame.netherreactor.functionalities.EntityDeathEventWatcher;
+import me.mythicalflame.netherreactor.functionalities.ModTickTask;
+import me.mythicalflame.netherreactor.functionalities.PlayerInteractEventWatcher;
+import me.mythicalflame.netherreactor.functionalities.PlayerItemConsumeEventWatcher;
+import me.mythicalflame.netherreactor.items.ModdedArmorPiece;
+import me.mythicalflame.netherreactor.items.ModdedArmorSet;
+import me.mythicalflame.netherreactor.items.ModdedConsumable;
+import me.mythicalflame.netherreactor.items.ModdedItem;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
@@ -31,13 +31,13 @@ public class ModRegister
      */
     private static final boolean[] registered = new boolean[5];
 
-    public static void register(Mod mod, SpigotModding plugin)
+    public static void register(Mod mod, NetherReactorModLoader plugin)
     {
         registerArmor(mod, plugin);
         registerItems(mod, plugin);
     }
 
-    private static void registerArmor(Mod mod, SpigotModding plugin)
+    private static void registerArmor(Mod mod, NetherReactorModLoader plugin)
     {
         for (ModdedArmorSet set : mod.getRegisteredArmor())
         {
@@ -126,7 +126,7 @@ public class ModRegister
         }
     }
 
-    private static void registerItems(Mod mod, SpigotModding plugin)
+    private static void registerItems(Mod mod, NetherReactorModLoader plugin)
     {
         for (ModdedItem item : mod.getRegisteredItems())
         {

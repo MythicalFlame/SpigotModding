@@ -1,8 +1,11 @@
-# SPIGOTMODDING configuration
-# This file allows you to change how the spigotmodding plugin works
+# NETHERREACTOR configuration
+# This file allows you to change how the netherreactor plugin works
 
 # If an error occurs and these setting are true, the server will be shut down
 shutDownServerOnError:
+  # Thrown when a mod is registered but its API version is not supported
   modVersionError: true
+  # Thrown when a mod is registered but its namespace is already being used
   modNamespaceCollision: true
+  # Thrown when a mod is registered but its content uses multiple namespaces
   modDoubleNamespaces: true

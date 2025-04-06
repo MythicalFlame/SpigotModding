@@ -1,9 +1,9 @@
-package me.mythicalflame.spigotmodding.utilities;
+package me.mythicalflame.netherreactor.utilities;
 
-import me.mythicalflame.spigotmodding.SpigotModding;
-import me.mythicalflame.spigotmodding.items.ModdedArmorPiece;
-import me.mythicalflame.spigotmodding.items.ModdedArmorSet;
-import me.mythicalflame.spigotmodding.items.ModdedItem;
+import me.mythicalflame.netherreactor.NetherReactorModLoader;
+import me.mythicalflame.netherreactor.items.ModdedArmorPiece;
+import me.mythicalflame.netherreactor.items.ModdedArmorSet;
+import me.mythicalflame.netherreactor.items.ModdedItem;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class SpigotModdingAPI
+public class NetherReactorAPI
 {
     private static final ArmorChoice emptyArmorChoice = new ArmorChoice(new ModdedArmorPiece[]{});
 
@@ -55,7 +55,7 @@ public class SpigotModdingAPI
                     }
                     else
                     {
-                        ModdedItem pieceFound = SpigotModdingAPI.getModdedItem(playerArmor, Arrays.asList(choice.armors()));
+                        ModdedItem pieceFound = NetherReactorAPI.getModdedItem(playerArmor, Arrays.asList(choice.armors()));
 
                         if (pieceFound == null)
                         {
@@ -78,7 +78,7 @@ public class SpigotModdingAPI
      */
     public static ModdedItem getModdedItem(String namespace, String ID)
     {
-        for (Mod mod : SpigotModding.getRegisteredMods())
+        for (Mod mod : NetherReactorModLoader.getRegisteredMods())
         {
             if (namespace.equalsIgnoreCase(mod.getNamespace()))
             {
@@ -105,19 +105,19 @@ public class SpigotModdingAPI
      */
     public static ModdedItem getModdedItem(ItemStack stack)
     {
-        if (stack == null || stack.getType() == Material.AIR || !Objects.requireNonNull(stack.getItemMeta()).getPersistentDataContainer().has(SpigotModding.getContentKey(), PersistentDataType.STRING))
+        if (stack == null || stack.getType() == Material.AIR || !Objects.requireNonNull(stack.getItemMeta()).getPersistentDataContainer().has(NetherReactorModLoader.getContentKey(), PersistentDataType.STRING))
         {
             return null;
         }
 
-        String stackContent = stack.getItemMeta().getPersistentDataContainer().get(SpigotModding.getContentKey(), PersistentDataType.STRING);
+        String stackContent = stack.getItemMeta().getPersistentDataContainer().get(NetherReactorModLoader.getContentKey(), PersistentDataType.STRING);
         assert stackContent != null;
 
-        for (Mod mod : SpigotModding.getRegisteredMods())
+        for (Mod mod : NetherReactorModLoader.getRegisteredMods())
         {
             for (ModdedItem item : mod.getRegisteredItems())
             {
-                if (stackContent.equals(Objects.requireNonNull(item.getItem().getItemMeta()).getPersistentDataContainer().get(SpigotModding.getContentKey(), PersistentDataType.STRING)))
+                if (stackContent.equals(Objects.requireNonNull(item.getItem().getItemMeta()).getPersistentDataContainer().get(NetherReactorModLoader.getContentKey(), PersistentDataType.STRING)))
                 {
                     return item;
                 }
@@ -136,17 +136,17 @@ public class SpigotModdingAPI
      */
     public static ModdedItem getModdedItem(ItemStack stack, List<ModdedItem> list)
     {
-        if (stack == null || stack.getType() == Material.AIR || !Objects.requireNonNull(stack.getItemMeta()).getPersistentDataContainer().has(SpigotModding.getContentKey(), PersistentDataType.STRING))
+        if (stack == null || stack.getType() == Material.AIR || !Objects.requireNonNull(stack.getItemMeta()).getPersistentDataContainer().has(NetherReactorModLoader.getContentKey(), PersistentDataType.STRING))
         {
             return null;
         }
 
-        String stackContent = stack.getItemMeta().getPersistentDataContainer().get(SpigotModding.getContentKey(), PersistentDataType.STRING);
+        String stackContent = stack.getItemMeta().getPersistentDataContainer().get(NetherReactorModLoader.getContentKey(), PersistentDataType.STRING);
         assert stackContent != null;
 
         for (ModdedItem item : list)
         {
-            if (stackContent.equals(Objects.requireNonNull(item.getItem().getItemMeta()).getPersistentDataContainer().get(SpigotModding.getContentKey(), PersistentDataType.STRING)))
+            if (stackContent.equals(Objects.requireNonNull(item.getItem().getItemMeta()).getPersistentDataContainer().get(NetherReactorModLoader.getContentKey(), PersistentDataType.STRING)))
             {
                 return item;
             }
@@ -163,7 +163,7 @@ public class SpigotModdingAPI
      */
     public static Mod getMod(String namespace)
     {
-        for (Mod m : SpigotModding.getRegisteredMods())
+        for (Mod m : NetherReactorModLoader.getRegisteredMods())
         {
             if (m.getNamespace().equalsIgnoreCase(namespace))
             {
@@ -182,7 +182,7 @@ public class SpigotModdingAPI
      */
     public static Mod getMod(ModdedItem moddedItem)
     {
-        for (Mod m : SpigotModding.getRegisteredMods())
+        for (Mod m : NetherReactorModLoader.getRegisteredMods())
         {
             if (m.getNamespace().equalsIgnoreCase(moddedItem.getNamespace()))
             {

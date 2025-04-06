@@ -1,6 +1,6 @@
-package me.mythicalflame.spigotmodding.items;
+package me.mythicalflame.netherreactor.items;
 
-import me.mythicalflame.spigotmodding.exceptions.NotWearableException;
+import me.mythicalflame.netherreactor.exceptions.NotWearableException;
 import org.bukkit.Material;
 
 import java.util.Arrays;

@@ -1,24 +1,24 @@
-name: SpigotModding
+name: NetherReactor
 version: '${project.version}'
-main: me.mythicalflame.spigotmodding.SpigotModding
+main: me.mythicalflame.netherreactor.NetherReactorModLoader
 api-version: 1.18
 load: STARTUP
 authors: [ MythicalFlame ]
 description: Spigot modding framework for custom blocks and items
 commands:
-  spigotmodding:
-    description: Main command for spigotmodding
-    usage: /spigotmodding <subCommand>
+  netherreactor:
+    description: Main command for NetherReactor
+    usage: /netherreactor <subCommand>
 permissions:
-  spigotmodding.commandspigotmodding.give:
-    description: Allows the user to use the spigotmodding give command to give custom items.
+  netherreactor.commandnetherreactor.give:
+    description: Allows the user to use the netherreactor give command to give custom items.
     default: op
-  spigotmodding.commandspigotmodding.items:
-    description: Allows the user to use the spigotmodding items command to see the list of registered items.
+  netherreactor.commandnetherreactor.items:
+    description: Allows the user to use the netherreactor items command to see the list of registered items.
     default: true
-  spigotmodding.commandspigotmodding.item:
-    description: Allows the user to use the spigotmodding item command to inspect an item.
+  netherreactor.commandnetherreactor.item:
+    description: Allows the user to use the netherreactor item command to inspect an item.
     default: true
-  spigotmodding.commandspigotmodding.*:
-    description: Allows the user to use the spigotmodding command and its subcommands.
+  netherreactor.commandnetherreactor.*:
+    description: Allows the user to use the netherreactor command and its subcommands.
     default: false

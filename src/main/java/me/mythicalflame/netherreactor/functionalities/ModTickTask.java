@@ -1,9 +1,9 @@
-package me.mythicalflame.spigotmodding.functionalities;
+package me.mythicalflame.netherreactor.functionalities;
 
-import me.mythicalflame.spigotmodding.items.ModdedArmorSet;
-import me.mythicalflame.spigotmodding.items.ModdedItem;
-import me.mythicalflame.spigotmodding.utilities.EventType;
-import me.mythicalflame.spigotmodding.utilities.SpigotModdingAPI;
+import me.mythicalflame.netherreactor.items.ModdedArmorSet;
+import me.mythicalflame.netherreactor.items.ModdedItem;
+import me.mythicalflame.netherreactor.utilities.EventType;
+import me.mythicalflame.netherreactor.utilities.NetherReactorAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -24,7 +24,7 @@ public class ModTickTask extends BukkitRunnable
         {
             for (ItemStack stack : player.getInventory().getContents())
             {
-                ModdedItem item = SpigotModdingAPI.getModdedItem(stack, items);
+                ModdedItem item = NetherReactorAPI.getModdedItem(stack, items);
 
                 if (item != null)
                 {
@@ -49,7 +49,7 @@ public class ModTickTask extends BukkitRunnable
 
             for (ModdedArmorSet set : armorSets)
             {
-                if (SpigotModdingAPI.isWearingSet(player, set))
+                if (NetherReactorAPI.isWearingSet(player, set))
                 {
                     set.onTick(player);
                 }

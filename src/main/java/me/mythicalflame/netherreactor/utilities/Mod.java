@@ -1,7 +1,7 @@
-package me.mythicalflame.spigotmodding.utilities;
+package me.mythicalflame.netherreactor.utilities;
 
-import me.mythicalflame.spigotmodding.items.ModdedArmorSet;
-import me.mythicalflame.spigotmodding.items.ModdedItem;
+import me.mythicalflame.netherreactor.items.ModdedArmorSet;
+import me.mythicalflame.netherreactor.items.ModdedItem;
 
 import java.util.ArrayList;
 

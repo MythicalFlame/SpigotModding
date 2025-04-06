@@ -1,4 +1,4 @@
-# SpigotModding Library
+# NetherReactor Library
 Very experimental and new, lacking many features.
 
 ## Usage
@@ -49,24 +49,35 @@ Custom armor is a bit more complex to set up. To begin, create your armor piece 
 #### NOTE: if your armor set does not require some slots, put those slots as null in your `ModdedArmorPiece` array.
 
 ### Registering your mod
-To register your custom items and armor sets, the `SpigotModding#registerMod` method can be used. This method takes a `Mod` object. Its constructor takes in a namespace, display name, and an API version. The Version class has two constructors: `int major, int minor, int patch, String releaseData` or `int major, int minor, int patch`, which uses "release" as the releaseData.  
+To register your custom items and armor sets, the `NetherReactor#registerMod` method can be used. This method takes a `Mod` object. Its constructor takes in a namespace, display name, and an API version. The Version class has two constructors: `int major, int minor, int patch, String releaseData` or `int major, int minor, int patch`, which uses "release" as the releaseData.  
 Registration example (with the steel armor set from above):
+
 ```java
-import me.mythicalflame.spigotmodding.SpigotModding;
-import me.mythicalflame.spigotmodding.utilities.Mod;
-import me.mythicalflame.spigotmodding.utilities.Version;
-import me.mythicalflame.spigotmodding.items.ModdedItem;
-import me.mythicalflame.spigotmodding.items.ModdedArmorSet;
+
+import me.mythicalflame.netherreactor.utilities.Mod;
+import me.mythicalflame.netherreactor.utilities.Version;
 
 ...
 
 Mod mod = new Mod("morearmors", "More Armors!", new Version(0, 7, 0));
-mod.registerItem(new ModdedItemSteelHelmet());
-mod.registerItem(new ModdedItemSteelChestplate());
-mod.registerItem(new ModdedItemSteelLeggings());
-mod.registerItem(new ModdedItemSteelBoots());
-mod.registerArmor(new ModdedArmorSetSteelSet());
-SpigotModding.registerMod(mod);
+mod.
+
+registerItem(new ModdedItemSteelHelmet());
+        mod.
+
+registerItem(new ModdedItemSteelChestplate());
+        mod.
+
+registerItem(new ModdedItemSteelLeggings());
+        mod.
+
+registerItem(new ModdedItemSteelBoots());
+        mod.
+
+registerArmor(new ModdedArmorSetSteelSet());
+        NetherReactor.
+
+registerMod(mod);
 ```
 
 ### Features yet to be implemented

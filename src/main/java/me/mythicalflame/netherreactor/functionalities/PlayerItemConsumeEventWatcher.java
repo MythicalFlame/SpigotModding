@@ -1,9 +1,9 @@
-package me.mythicalflame.spigotmodding.functionalities;
+package me.mythicalflame.netherreactor.functionalities;
 
-import me.mythicalflame.spigotmodding.items.ModdedArmorSet;
-import me.mythicalflame.spigotmodding.items.ModdedConsumable;
-import me.mythicalflame.spigotmodding.items.ModdedItem;
-import me.mythicalflame.spigotmodding.utilities.SpigotModdingAPI;
+import me.mythicalflame.netherreactor.items.ModdedArmorSet;
+import me.mythicalflame.netherreactor.items.ModdedConsumable;
+import me.mythicalflame.netherreactor.items.ModdedItem;
+import me.mythicalflame.netherreactor.utilities.NetherReactorAPI;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
@@ -27,7 +27,7 @@ public class PlayerItemConsumeEventWatcher implements Listener
     {
         for (ModdedArmorSet set : armorSets)
         {
-            if (SpigotModdingAPI.isWearingSet(event.getPlayer(), set))
+            if (NetherReactorAPI.isWearingSet(event.getPlayer(), set))
             {
                 set.onConsume(event);
             }
@@ -38,7 +38,7 @@ public class PlayerItemConsumeEventWatcher implements Listener
     {
         ItemStack consumed = event.getItem();
 
-        ModdedConsumable consumableUsed = (ModdedConsumable) SpigotModdingAPI.getModdedItem(consumed, items);
+        ModdedConsumable consumableUsed = (ModdedConsumable) NetherReactorAPI.getModdedItem(consumed, items);
 
         if (consumableUsed != null)
         {

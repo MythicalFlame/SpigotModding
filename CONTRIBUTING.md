@@ -2,7 +2,7 @@
 ## Reporting bugs
 1. Ensure you are on the latest version
 2. Make sure the bug is reproducible (provide steps)
-3. If the issue is with item functionality, ensure that it is the fault of the SpigotModding framework (and not the code of the custom items plugin that has issues)
+3. If the issue is with item functionality, ensure that it is the fault of the NetherReactor framework (and not the code of the custom items plugin that has issues)
 ## Pull requests
 > **_NOTE:_** We are not currently accepting PRs for new features. Only PRs that fix bugs will be allowed.
 1. Make it clear in the title of your PR what the purpose is

@@ -1,7 +1,7 @@
-package me.mythicalflame.spigotmodding.commands;
+package me.mythicalflame.netherreactor.commands;
 
-import me.mythicalflame.spigotmodding.items.ModdedItem;
-import me.mythicalflame.spigotmodding.utilities.SpigotModdingAPI;
+import me.mythicalflame.netherreactor.items.ModdedItem;
+import me.mythicalflame.netherreactor.utilities.NetherReactorAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -12,15 +12,15 @@ public class GiveSubCommand
 {
     public static void giveSubCommand(CommandSender sender, String[] args)
     {
-        if (!sender.hasPermission("spigotmodding.commandspigotmodding.give"))
+        if (!sender.hasPermission("netherreactor.commandnetherreactor.give"))
         {
-            sender.sendMessage(ChatColor.RED + "You do not have permission to use the spigotmodding give command!");
+            sender.sendMessage(ChatColor.RED + "You do not have permission to use the netherreactor give command!");
             return;
         }
 
         if (args.length < 3)
         {
-            sender.sendMessage(ChatColor.DARK_GREEN + "/spigotmodding give <playerName> <itemNamespace:itemID> [amount]");
+            sender.sendMessage(ChatColor.DARK_GREEN + "/netherreactor give <playerName> <itemNamespace:itemID> [amount]");
             return;
         }
 
@@ -40,11 +40,11 @@ public class GiveSubCommand
         //ensure that itemEntered has 2 elements (correct input from command sender)
         if (itemEntered.length != 2)
         {
-            sender.sendMessage(ChatColor.RED + "/spigotmodding give <playerName> <itemNamespace:itemID> [amount]");
+            sender.sendMessage(ChatColor.RED + "/netherreactor give <playerName> <itemNamespace:itemID> [amount]");
             return;
         }
 
-        ModdedItem itemFound = SpigotModdingAPI.getModdedItem(itemEntered[0], itemEntered[1]);
+        ModdedItem itemFound = NetherReactorAPI.getModdedItem(itemEntered[0], itemEntered[1]);
 
         if (itemFound == null)
         {

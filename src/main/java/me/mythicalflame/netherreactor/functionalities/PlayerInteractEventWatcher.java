@@ -1,9 +1,9 @@
-package me.mythicalflame.spigotmodding.functionalities;
+package me.mythicalflame.netherreactor.functionalities;
 
-import me.mythicalflame.spigotmodding.items.ModdedArmorSet;
-import me.mythicalflame.spigotmodding.items.ModdedItem;
-import me.mythicalflame.spigotmodding.utilities.EventType;
-import me.mythicalflame.spigotmodding.utilities.SpigotModdingAPI;
+import me.mythicalflame.netherreactor.items.ModdedArmorSet;
+import me.mythicalflame.netherreactor.items.ModdedItem;
+import me.mythicalflame.netherreactor.utilities.EventType;
+import me.mythicalflame.netherreactor.utilities.NetherReactorAPI;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -29,7 +29,7 @@ public class PlayerInteractEventWatcher implements Listener
     {
         for (ModdedArmorSet set : armorSets)
         {
-            if (SpigotModdingAPI.isWearingSet(event.getPlayer(), set))
+            if (NetherReactorAPI.isWearingSet(event.getPlayer(), set))
             {
                 set.onInteract(event);
             }
@@ -42,7 +42,7 @@ public class PlayerInteractEventWatcher implements Listener
 
         for (ItemStack stack : player.getInventory().getContents())
         {
-            ModdedItem item = SpigotModdingAPI.getModdedItem(stack, items);
+            ModdedItem item = NetherReactorAPI.getModdedItem(stack, items);
 
             EventType type;
 

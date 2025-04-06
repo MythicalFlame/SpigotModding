@@ -1,4 +1,4 @@
-package me.mythicalflame.spigotmodding.exceptions;
+package me.mythicalflame.netherreactor.exceptions;
 
 /**
  * This exception is thrown when a ModdedArmorPiece is attempted to be initialized with a non-wearable Material.

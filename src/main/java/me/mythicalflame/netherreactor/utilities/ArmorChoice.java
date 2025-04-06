@@ -1,6 +1,6 @@
-package me.mythicalflame.spigotmodding.utilities;
+package me.mythicalflame.netherreactor.utilities;
 
-import me.mythicalflame.spigotmodding.items.ModdedArmorPiece;
+import me.mythicalflame.netherreactor.items.ModdedArmorPiece;
 
 /**
  * Represents possible armor piece choices to satisfy an armor set.

@@ -1,10 +1,10 @@
-package me.mythicalflame.spigotmodding;
+package me.mythicalflame.netherreactor;
 
-import me.mythicalflame.spigotmodding.commands.CommandSpigotModding;
-import me.mythicalflame.spigotmodding.items.ModdedItem;
-import me.mythicalflame.spigotmodding.utilities.Mod;
-import me.mythicalflame.spigotmodding.utilities.ModRegister;
-import me.mythicalflame.spigotmodding.utilities.Version;
+import me.mythicalflame.netherreactor.commands.CommandNetherReactor;
+import me.mythicalflame.netherreactor.items.ModdedItem;
+import me.mythicalflame.netherreactor.utilities.Mod;
+import me.mythicalflame.netherreactor.utilities.ModRegister;
+import me.mythicalflame.netherreactor.utilities.Version;
 import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.logging.Logger;
 
-public final class SpigotModding extends JavaPlugin
+public final class NetherReactorModLoader extends JavaPlugin
 {
-    private static final Version[] compatibleVersions = {new Version(0, 7, 1, "release")};
-    private static SpigotModding plugin;
+    private static final Version[] compatibleVersions = {new Version(0, 7, 2, "release")};
+    private static NetherReactorModLoader plugin;
     private static Logger logger;
     private static final ArrayList<Mod> registeredMods = new ArrayList<>();
     private static NamespacedKey contentKey;
@@ -32,7 +32,7 @@ public final class SpigotModding extends JavaPlugin
         saveDefaultConfig();
 
         //Enable commands
-        Objects.requireNonNull(this.getCommand("spigotmodding")).setExecutor(new CommandSpigotModding());
+        Objects.requireNonNull(this.getCommand("netherreactor")).setExecutor(new CommandNetherReactor());
 
         logger.info("Finished starting up!");
     }
@@ -75,7 +75,7 @@ public final class SpigotModding extends JavaPlugin
                 logger.severe("Critical error found while registering mod " + mod + "!");
                 logger.severe("Could not register mod " + mod + " due to requiring an incompatible version! (" + mod.getAPIVersion() + ")");
                 logger.severe("The server is now shutting down as a precautionary measure in case this mod was integral to your server experience.");
-                logger.severe("To disable the server shutting down, set shutDownServerOnError.modVersionError to false in the SpigotModding configuration.");
+                logger.severe("To disable the server shutting down, set shutDownServerOnError.modVersionError to false in the NetherReactor configuration.");
                 plugin.getServer().shutdown();
             }
             else
@@ -94,7 +94,7 @@ public final class SpigotModding extends JavaPlugin
                     logger.severe("Critical error found while registering mod " + mod + "!");
                     logger.severe("Could not register mod " + mod + " due to namespace " + mod.getNamespace() + " being already used!");
                     logger.severe("The server is now shutting down as a precautionary measure in case this mod was integral to your server experience.");
-                    logger.severe("To disable the server shutting down, set shutDownServerOnError.modNamespaceCollision to false in the SpigotModding configuration.");
+                    logger.severe("To disable the server shutting down, set shutDownServerOnError.modNamespaceCollision to false in the NetherReactor configuration.");
                     plugin.getServer().shutdown();
                 }
                 else
@@ -115,7 +115,7 @@ public final class SpigotModding extends JavaPlugin
                     logger.severe("Critical error found while registering mod " + mod + "!");
                     logger.severe("Could not register mod " + mod + " due to multiple namespaces being used!");
                     logger.severe("The server is now shutting down as a precautionary measure in case this mod was integral to your server experience.");
-                    logger.severe("To disable the server shutting down, set shutDownServerOnError.modDoubleNamespaces to false in the SpigotModding configuration.");
+                    logger.severe("To disable the server shutting down, set shutDownServerOnError.modDoubleNamespaces to false in the NetherReactor configuration.");
                     plugin.getServer().shutdown();
                 }
                 else

@@ -1,4 +1,4 @@
-package me.mythicalflame.spigotmodding.exceptions;
+package me.mythicalflame.netherreactor.exceptions;
 
 /**
  * This exception is thrown when a ModdedConsumable is attempted to be initialized with a Material that is not edible.

@@ -1,7 +1,7 @@
-package me.mythicalflame.spigotmodding.items;
+package me.mythicalflame.netherreactor.items;
 
-import me.mythicalflame.spigotmodding.exceptions.ArmorSetChoicesException;
-import me.mythicalflame.spigotmodding.utilities.ArmorChoice;
+import me.mythicalflame.netherreactor.exceptions.ArmorSetChoicesException;
+import me.mythicalflame.netherreactor.utilities.ArmorChoice;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
