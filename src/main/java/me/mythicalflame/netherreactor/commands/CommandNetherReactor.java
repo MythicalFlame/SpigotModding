@@ -34,6 +34,6 @@ public class CommandNetherReactor implements CommandExecutor
     //helper methods
     public void helpMessage(CommandSender sender)
     {
-        sender.sendMessage(ChatColor.GOLD + "NetherReactor commands help:\n" + ChatColor.DARK_GREEN + "/netherreactor help " + ChatColor.RESET + "Displays this message.\n" + ChatColor.DARK_GREEN + "/netherreactor give " + ChatColor.RESET + "Gives custom features.\n" + ChatColor.DARK_GREEN + "/netherreactor items " + ChatColor.RESET + "Displays all registered items.\n" + ChatColor.DARK_GREEN + "/netherreactor item " + ChatColor.RESET + "Displays information about an item.\n");
+        sender.sendMessage(ChatColor.GOLD + "NetherReactor commands help:\n" + ChatColor.DARK_GREEN + "/netherreactor help " + ChatColor.RESET + "Displays this message.\n" + ChatColor.DARK_GREEN + "/netherreactor give " + ChatColor.RESET + "Gives custom features.\n" + ChatColor.DARK_GREEN + "/netherreactor items " + ChatColor.RESET + "Displays all registered items.\n" + ChatColor.DARK_GREEN + "/netherreactor item " + ChatColor.RESET + "Displays information about an item.\n" + ChatColor.DARK_GREEN + "/netherreactor mods " + ChatColor.RESET + "Displays all registered mods.\n" + ChatColor.DARK_GREEN + "/netherreactor mod " + ChatColor.RESET + "Displays information about a mod.");
     }
 }
