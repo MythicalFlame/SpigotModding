@@ -60,24 +60,12 @@ import me.mythicalflame.netherreactor.utilities.Version;
 ...
 
 Mod mod = new Mod("morearmors", "More Armors!", new Version(0, 7, 0));
-mod.
-
-registerItem(new ModdedItemSteelHelmet());
-        mod.
-
-registerItem(new ModdedItemSteelChestplate());
-        mod.
-
-registerItem(new ModdedItemSteelLeggings());
-        mod.
-
-registerItem(new ModdedItemSteelBoots());
-        mod.
-
-registerArmor(new ModdedArmorSetSteelSet());
-        NetherReactor.
-
-registerMod(mod);
+mod.registerItem(new ModdedItemSteelHelmet());
+mod.registerItem(new ModdedItemSteelChestplate());
+mod.registerItem(new ModdedItemSteelLeggings());
+mod.registerItem(new ModdedItemSteelBoots());
+mod.registerArmor(new ModdedArmorSetSteelSet());
+NetherReactor.registerMod(mod);
 ```
 
 ### Features yet to be implemented
@@ -85,4 +73,4 @@ registerMod(mod);
 #### Custom Entities
 Not supported yet, medium priority.
 #### Custom Blocks
-Will take a lot of work, for now you can create a customItem for minimal functionality, but it will become a regular block when you place it.
+Will take a lot of work, for now you can create a customItem for minimal functionality, but it will become a regular block when you place it. Experimental API expected in 0.8.0
